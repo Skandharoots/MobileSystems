@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Lab_Application</string>
+    <string name="tip_amount">Tip Amount: %s</string>
+    <string name="cost_of_service">Cost of Service</string>
+    <string name="service_question">How was the service?</string>
+    <string name="tip_20">Amazing (20%)</string>
+    <string name="tip_18">Good (18%)</string>
+    <string name="tip_15">Okay (15%)</string>
+    <string name="roud_up">Round up tip?</string>
+    <string name="button_text">Calculate</string>
+    <string name="random_tip">Tip Amount: 10$</string>
+</resources>

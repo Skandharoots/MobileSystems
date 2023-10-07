@@ -15,12 +15,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.switchViewButton.setOnClickListener{ switchView() }
+        binding.switchViewButton.setOnClickListener{ switchToCalculator() }
+        binding.switchListButton.setOnClickListener{ switchToAffirmations() }
     }
 
-    private fun switchView() {
+    private fun switchToCalculator() {
         val intent = Intent(this, TipCalculatorSite::class.java)
         startActivity(intent)
     }
 
+    private fun switchToAffirmations() {
+        val intent = Intent(this, AffirmationView::class.java)
+        startActivity(intent)
+    }
 }

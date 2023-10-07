@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -27,7 +34,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/icon_arrow_back"
         app:layout_constraintTop_toTopOf="@id/cost_of_service"
-        app:layout_constraintBottom_toBottomOf="@id/cost_of_service"/>
+        app:layout_constraintBottom_toBottomOf="@id/cost_of_service"
+        app:tint="?attr/colorPrimary"
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/cost_of_service"
@@ -44,6 +53,7 @@
             android:id="@+id/cost_of_service_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -66,7 +76,9 @@
         app:srcCompat="@drawable/ic_service"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/service_question"
-        app:layout_constraintBottom_toBottomOf="@id/service_question" />
+        app:layout_constraintBottom_toBottomOf="@id/service_question"
+        app:tint="?attr/colorPrimary"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -110,7 +122,9 @@
         app:srcCompat="@drawable/ic_round_up"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/round_up_switch"
-        app:layout_constraintBottom_toBottomOf="@id/round_up_switch" />
+        app:layout_constraintBottom_toBottomOf="@id/round_up_switch"
+        app:tint="?attr/colorPrimary"
+        />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/round_up_switch"
@@ -126,7 +140,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/button_text"
-        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/round_up_switch"
         android:layout_marginTop="8dp"
@@ -146,3 +159,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

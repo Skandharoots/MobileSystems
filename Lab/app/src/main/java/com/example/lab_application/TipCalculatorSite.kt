@@ -1,8 +1,11 @@
 package com.example.lab_application
 
+import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -11,18 +14,63 @@ import com.example.lab_application.databinding.ActivityMainBinding
 import com.example.lab_application.databinding.TipLayoutBinding
 import java.text.NumberFormat
 
+const val KEY_TIP = "tip_key"
+
 class TipCalculatorSite : AppCompatActivity() {
 
     private lateinit var binding : TipLayoutBinding
+
+    private var tipFinal = "Tip Amount: $0"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = TipLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.tipResult.text = "Tip Amount: $0"
+        if (savedInstanceState != null) {
+            tipFinal = savedInstanceState.getString(KEY_TIP, "Tip Amount: $0")
+        }
+        binding.tipResult.text = tipFinal
         binding.calculateButton.setOnClickListener{calculateTip()}
         binding.iconArrowBack.setOnClickListener{goBack()}
         binding.costOfService.setOnKeyListener{view, keyCode, _ -> handleKeyEvent(view, keyCode)}
     }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(ContentValues.TAG, "onStart Called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(ContentValues.TAG, "onResume Called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(ContentValues.TAG, "onPause Called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(ContentValues.TAG, "onStop Called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(ContentValues.TAG, "onDestroy Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(ContentValues.TAG, "onRestart Called")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(KEY_TIP, tipFinal)
+        Log.d(TAG, "onSaveInstanceState Called")
+    }
+
     private fun calculateTip() {
         val stringInTextField = binding.costOfServiceEditText.text.toString()
         val cost = stringInTextField.toDoubleOrNull()
@@ -41,7 +89,8 @@ class TipCalculatorSite : AppCompatActivity() {
         }
         val formattedTip = NumberFormat.getCurrencyInstance().format(tip)
         binding.tipResult.text = getString(R.string.tip_amount, formattedTip)
-
+        tipFinal = "Tip Amount: ${formattedTip}"
+        Log.d(TAG, tipFinal)
     }
 
     private fun goBack() {

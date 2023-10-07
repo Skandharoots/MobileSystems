@@ -1,7 +1,10 @@
 package com.example.lab_application
 
+import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lab_application.adapter.ItemAdapter
@@ -32,8 +35,39 @@ class AffirmationView : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.d(ContentValues.TAG, "onStart Called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(ContentValues.TAG, "onResume Called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(ContentValues.TAG, "onPause Called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(ContentValues.TAG, "onStop Called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(ContentValues.TAG, "onDestroy Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(ContentValues.TAG, "onRestart Called")
+    }
+
     private fun goBack() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+
 }

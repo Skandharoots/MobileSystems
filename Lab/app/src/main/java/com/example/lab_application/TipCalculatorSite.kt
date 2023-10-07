@@ -18,6 +18,7 @@ class TipCalculatorSite : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = TipLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.tipResult.text = "Tip Amount: $0"
         binding.calculateButton.setOnClickListener{calculateTip()}
         binding.iconArrowBack.setOnClickListener{goBack()}
         binding.costOfService.setOnKeyListener{view, keyCode, _ -> handleKeyEvent(view, keyCode)}

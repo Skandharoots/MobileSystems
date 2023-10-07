@@ -1,5 +1,6 @@
 package com.example.lab_application
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lab_application.databinding.ActivityMainBinding
@@ -14,6 +15,7 @@ class TipCalculatorSite : AppCompatActivity() {
         binding = TipLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.calculateButton.setOnClickListener{calculateTip()}
+        binding.iconArrowBack.setOnClickListener{goBack()}
     }
     private fun calculateTip() {
         val stringInTextField = binding.costOfServiceEditText.text.toString()
@@ -34,5 +36,10 @@ class TipCalculatorSite : AppCompatActivity() {
         val formattedTip = NumberFormat.getCurrencyInstance().format(tip)
         binding.tipResult.text = getString(R.string.tip_amount, formattedTip)
 
+    }
+
+    private fun goBack() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }

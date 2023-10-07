@@ -11,5 +11,5 @@
     <string name="random_tip">Tip Amount: 10$</string>
     <string name="switch_to_view_2">Switch to our tip calculator here</string>
     <string name="welcome_text">Welcome to Marek Kopania\'s Application\nYou can press the buttons to switch the views</string>
-    <string name="welcome_text_small"></string>
+    <string name="go_back">Go back</string>
 </resources>

@@ -20,16 +20,18 @@ class TipCalculatorSite : AppCompatActivity() {
 
     private lateinit var binding : TipLayoutBinding
 
-    private var tipFinal = "Tip Amount: $0"
+    private var tipFinal = "$0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = TipLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState != null) {
-            tipFinal = savedInstanceState.getString(KEY_TIP, "Tip Amount: $0")
+            Log.d(TAG, "Saved Instance Open")
+            tipFinal = savedInstanceState.getString(KEY_TIP, "$0")
+            Log.d(TAG, tipFinal)
         }
-        binding.tipResult.text = tipFinal
+        binding.tipResult.text = getString(R.string.tip_amount, tipFinal)
         binding.calculateButton.setOnClickListener{calculateTip()}
         binding.iconArrowBack.setOnClickListener{goBack()}
         binding.costOfService.setOnKeyListener{view, keyCode, _ -> handleKeyEvent(view, keyCode)}
@@ -89,8 +91,7 @@ class TipCalculatorSite : AppCompatActivity() {
         }
         val formattedTip = NumberFormat.getCurrencyInstance().format(tip)
         binding.tipResult.text = getString(R.string.tip_amount, formattedTip)
-        tipFinal = "Tip Amount: ${formattedTip}"
-        Log.d(TAG, tipFinal)
+        tipFinal = formattedTip
     }
 
     private fun goBack() {

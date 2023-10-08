@@ -13,6 +13,9 @@
     <string name="switch_to_view_3">Switch to our affirmation list here</string>
     <string name="welcome_text">Welcome to Marek Kopania\'s Application\nYou can press the buttons to switch the views</string>
     <string name="go_back">Go back</string>
+    <string name="menu_text">Menu</string>
+    <string name="tip_menu_text">Tip Calculator</string>
+    <string name="affirmation_menu_text">Affirmations</string>
     <string name="affirmation_welcome">Affirmations just for You</string>
     <string name="affirmation1">I am strong.</string>
     <string name="affirmation2">I believe in myself.</string>

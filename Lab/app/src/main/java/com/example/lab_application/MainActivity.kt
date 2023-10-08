@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.preference.PreferenceActivity.Header
 import android.util.Log
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import com.example.lab_application.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

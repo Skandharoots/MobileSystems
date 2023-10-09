@@ -29,7 +29,7 @@ class AffirmationTest {
                 .scrollToPosition<RecyclerView.ViewHolder>(9)
         )
 
-        onView(withText(R.string.affirmation10))
+        onView(withText(R.string.affirmation9))
             .check(
                 matches(isDisplayed())
             )

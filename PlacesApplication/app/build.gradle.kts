@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -76,10 +74,18 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    // Compose dependencies
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-beta01")
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha09")
+    implementation("androidx.compose.material:material-icons-extended:1.5.3")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
+
+
     //Dagger - Hilt
-    implementation ("com.google.dagger:hilt-android:2.46.1")
-    kapt ("com.google.dagger:hilt-android-compiler:2.46.1")
-    kapt ("androidx.hilt:hilt-compiler:1.0.0")
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.37")
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
 
 
     // Room
@@ -87,8 +93,8 @@ dependencies {
 
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
-    implementation ("androidx.room:room-ktx:2.5.2")
 
+    implementation("androidx.room:room-ktx:$room_version")
 
 
 }

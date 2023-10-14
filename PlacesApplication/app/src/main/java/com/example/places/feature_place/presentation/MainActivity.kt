@@ -1,4 +1,4 @@
-package com.example.places
+package com.example.places.feature_place.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

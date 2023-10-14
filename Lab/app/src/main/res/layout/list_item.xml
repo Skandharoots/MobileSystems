@@ -2,9 +2,10 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -14,15 +15,53 @@
             android:layout_width="match_parent"
             android:layout_height="194dp"
             android:importantForAccessibility="no"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <TextView
             android:id="@+id/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingLeft="16dp"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_image"
+            />
+        <TextView
+            android:id="@+id/item_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingLeft="16dp"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_title"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_about"
+            android:padding="16dp"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_date"
+            app:layout_constraintEnd_toStartOf="@id/edit_button"/>
+        <ImageButton
+            android:id="@+id/edit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textAppearance="?attr/textAppearanceHeadline6" />
+            android:importantForAccessibility="yes"
+            app:srcCompat="@drawable/ic_edit_mode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorPrimary"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

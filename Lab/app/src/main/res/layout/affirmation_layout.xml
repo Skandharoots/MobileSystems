@@ -26,16 +26,16 @@
         app:tint="?attr/colorOnSurface"
         android:contentDescription="@string/go_back"
         />
-    <TextView
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/affirmation_title"
-        app:layout_constraintTop_toBottomOf="@id/icon_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:text="@string/affirmation_welcome"
-        style="@style/Widget.TipTime.TextView"
+        android:id="@+id/icon_add"
+        app:srcCompat="@drawable/ic_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?attr/colorOnSurface"
+        android:contentDescription="@string/go_back"
         />
 
 
@@ -47,7 +47,7 @@
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/affirmation_title"
+        app:layout_constraintTop_toBottomOf="@id/icon_arrow_back"
         style="@style/Widget.TipTime.TextView"/>
 
 

@@ -1,13 +1,16 @@
 package com.example.lab_application.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lab_application.AddUpdateView
 import com.example.lab_application.R
+import com.example.lab_application.databinding.AddUpdateLayoutBinding
 import com.example.lab_application.model.Affirmation
 
 class ItemAdapter(
@@ -47,6 +50,14 @@ class ItemAdapter(
             holder.textView2.text = context.resources.getString(item.stringResourceId2)
             holder.textView3.text = context.resources.getString(item.stringResourceId3)
             holder.imageView.setImageResource(item.imageResourceId)
+            holder.imageView.setOnClickListener {
+                val context = holder.itemView.context
+                val intent = Intent(context, AddUpdateView::class.java)
+                intent.putExtra(AddUpdateView.CITY, holder.textView.text.toString())
+                intent.putExtra(AddUpdateView.DATE, holder.textView2.text.toString())
+                intent.putExtra(AddUpdateView.ABOUT, holder.textView3.text.toString())
+                context.startActivity(intent)
+            }
 
         }
 

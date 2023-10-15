@@ -51,7 +51,7 @@ fun PlaceCard(
                 modifier = modifier
             )
         }
-
+        Spacer(modifier = Modifier.height(8.dp))
         Column(
             modifier = Modifier
                 .fillMaxSize()

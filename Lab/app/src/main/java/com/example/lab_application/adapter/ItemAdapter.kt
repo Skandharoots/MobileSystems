@@ -12,6 +12,7 @@ import com.example.lab_application.AddUpdateView
 import com.example.lab_application.R
 import com.example.lab_application.databinding.AddUpdateLayoutBinding
 import com.example.lab_application.model.Affirmation
+import com.example.lab_application.model.Place
 
 class ItemAdapter(
     private val context: Context,

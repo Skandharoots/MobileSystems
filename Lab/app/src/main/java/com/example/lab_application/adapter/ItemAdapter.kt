@@ -21,7 +21,7 @@ import java.io.InputStreamReader
 
 class ItemAdapter(
     private val context: Context,
-    private val dataset: List<Place>
+    private var dataset: List<Place>
     ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
 
@@ -77,4 +77,9 @@ class ItemAdapter(
          * Return the size of your dataset (invoked by the layout manager)
          */
         override fun getItemCount() = dataset.size
+
+        fun setData(place: List<Place>) {
+            dataset = place
+            notifyDataSetChanged()
+        }
 }

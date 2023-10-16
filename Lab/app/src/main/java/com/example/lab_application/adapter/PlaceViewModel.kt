@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class PlaceViewModel(application : Application) : AndroidViewModel(application) {
 
-    private val readAllData: LiveData<List<Place>>
+    val readAllData: LiveData<List<Place>>
     private val repository: PlaceRepository
 
     init {
@@ -21,10 +21,10 @@ class PlaceViewModel(application : Application) : AndroidViewModel(application) 
         readAllData = repository.getAllPlaces()
     }
 
-    fun addPlace(place: Place) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addPlace(place)
-        }
-    }
+//    fun addPlace(place: Place) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            repository.addPlace(place)
+//        }
+//    }
 
 }

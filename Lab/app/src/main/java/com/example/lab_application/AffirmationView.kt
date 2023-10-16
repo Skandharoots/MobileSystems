@@ -14,29 +14,34 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lab_application.adapter.ItemAdapter
+import com.example.lab_application.adapter.PlaceViewModel
 import com.example.lab_application.databinding.AffirmationLayoutBinding
 import com.example.lab_application.data.DataSource
 import com.example.lab_application.databinding.ActivityMainBinding
 import com.example.lab_application.databinding.TipLayoutBinding
 import com.example.lab_application.model.Affirmation
+import com.example.lab_application.model.Place
 
 class AffirmationView : AppCompatActivity() {
 
     private lateinit var binding : AffirmationLayoutBinding
     private lateinit var recyclerView : RecyclerView
-    private lateinit var myDataset : List<Affirmation>
+    private lateinit var myDataset : List<Place>
+    private lateinit var placeViewModel: PlaceViewModel
     private lateinit var itemAdapter : ItemAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = AffirmationLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // Initialize data.
-        myDataset = DataSource().loadAffirmations()
-
-        recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        itemAdapter = ItemAdapter(this, myDataset)
+        placeViewModel = ViewModelProvider(this).get(PlaceViewModel::class.java)
+        placeViewModel.readAllData.observe(this, Observer { place ->
+            itemAdapter.setData(place)
+        })
         recyclerView.adapter = itemAdapter
         binding.iconArrowBack.setOnClickListener{ goBack() }
         //binding.iconAdd.setOnClickListener({onAddButton()})

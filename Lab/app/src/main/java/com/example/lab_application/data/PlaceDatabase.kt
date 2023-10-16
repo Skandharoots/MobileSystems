@@ -17,6 +17,7 @@ abstract class PlaceDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: PlaceDatabase? = null
 
+
         @OptIn(InternalCoroutinesApi::class)
         fun getDatabase(context: Context): PlaceDatabase {
 

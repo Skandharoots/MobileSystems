@@ -12,5 +12,5 @@ data class Place(
     val city: String,
     val date: Date,
     val about: String,
-    val image: Blob
+    val image: String
     )

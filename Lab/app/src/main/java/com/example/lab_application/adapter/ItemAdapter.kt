@@ -2,6 +2,8 @@ package com.example.lab_application.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +15,15 @@ import com.example.lab_application.R
 import com.example.lab_application.databinding.AddUpdateLayoutBinding
 import com.example.lab_application.model.Affirmation
 import com.example.lab_application.model.Place
+import java.io.File
+import java.io.InputStream
+import java.io.InputStreamReader
 
 class ItemAdapter(
     private val context: Context,
-    private val dataset: List<Affirmation>
+    private val dataset: List<Place>
     ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
@@ -47,10 +53,15 @@ class ItemAdapter(
          */
         override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
             val item = dataset[position]
-            holder.textView.text = context.resources.getText(item.stringResourceId)
-            holder.textView2.text = context.resources.getString(item.stringResourceId2)
-            holder.textView3.text = context.resources.getString(item.stringResourceId3)
-            holder.imageView.setImageResource(item.imageResourceId)
+            val imgFile = File(item.image.toString())
+            var myBitmap: Bitmap? = null
+            if(imgFile.exists()) {
+                myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+            }
+            holder.textView.text = item.city.toString()
+            holder.textView2.text = item.date.toString()
+            holder.textView3.text = item.about.toString()
+            holder.imageView.setImageBitmap(myBitmap)
             holder.imageView.setOnClickListener {
                 val context = holder.itemView.context
                 val intent = Intent(context, AddUpdateView::class.java)

@@ -3,6 +3,7 @@ package com.example.lab_application
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import com.example.lab_application.adapter.PlaceViewModel
 import com.example.lab_application.databinding.FragmentAddBinding
 import com.example.lab_application.databinding.FragmentListBinding
 import com.example.lab_application.model.Place
+import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -31,7 +33,7 @@ class AddFragment : Fragment() {
     private lateinit var placeViewModel: PlaceViewModel
     var checkedRating: Int = 1
     private var _binding: FragmentAddBinding? = null
-    private lateinit var imageView: ImageView
+
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +56,11 @@ class AddFragment : Fragment() {
             onAbortButtonClick()
         }
 
+
         return view
     }
+
+
 
     private fun insertDataToDatabase() {
         if (requireView().findViewById<RadioButton>(R.id.b1).isChecked) {
@@ -96,5 +101,6 @@ class AddFragment : Fragment() {
         Toast.makeText(requireContext(), "Adding place aborted.", Toast.LENGTH_LONG).show()
         findNavController().navigate((R.id.action_addFragment_to_listFragment))
     }
+
 }
 

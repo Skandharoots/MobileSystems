@@ -9,7 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lab_application.ListFragmentDirections
 import com.example.lab_application.R
 import com.example.lab_application.databinding.AddUpdateLayoutBinding
 import com.example.lab_application.model.Affirmation
@@ -34,7 +37,6 @@ class ItemAdapter(
             val textView3: TextView = view.findViewById(R.id.item_about)
             val imageView: ImageView = view.findViewById(R.id.item_image)
             val rating: TextView = view.findViewById(R.id.rating)
-
         }
 
         /**
@@ -62,17 +64,14 @@ class ItemAdapter(
             holder.textView2.text = item.date.toString()
             holder.textView3.text = item.about.toString()
             var rating = item.rating.toString()
+            if (rating == "0") {
+                rating = "None"
+            }
             holder.rating.text = "Rating: ${rating}"
-//            holder.imageView.setImageBitmap(myBitmap)
-//            holder.imageView.setOnClickListener {
-//                val context = holder.itemView.context
-//                val intent = Intent(context, AddUpdateView::class.java)
-//                intent.putExtra(AddUpdateView.CITY, holder.textView.text.toString())
-//                intent.putExtra(AddUpdateView.DATE, holder.textView2.text.toString())
-//                intent.putExtra(AddUpdateView.ABOUT, holder.textView3.text.toString())
-//                context.startActivity(intent)
-//            }
-
+            holder.itemView.findViewById<CardView>(R.id.card_layout).setOnClickListener {
+                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(item)
+                holder.itemView.findNavController().navigate(action)
+            }
         }
 
         /**

@@ -42,7 +42,9 @@ class AddFragment : Fragment() {
         addBttn.setOnClickListener {
             insertDataToDatabase()
         }
-
+        binding.cancelPlace.setOnClickListener {
+            onAbortButtonClick()
+        }
 
         return view
     }
@@ -84,5 +86,10 @@ class AddFragment : Fragment() {
 
     private fun inputCheck(city: String, date: Date, about: String, rating: Int) : Boolean {
         return !(TextUtils.isEmpty(city) && date == null && TextUtils.isEmpty(about) && rating == null)
+    }
+
+    private fun onAbortButtonClick() {
+        Toast.makeText(requireContext(), "Adding place aborted.", Toast.LENGTH_LONG).show()
+        findNavController().navigate((R.id.action_addFragment_to_listFragment))
     }
 }

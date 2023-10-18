@@ -9,17 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lab_application.ListFragmentDirections
 import com.example.lab_application.R
-import com.example.lab_application.databinding.AddUpdateLayoutBinding
-import com.example.lab_application.model.Affirmation
 import com.example.lab_application.model.Place
-import java.io.File
-import java.io.InputStream
-import java.io.InputStreamReader
 
 class ItemAdapter(
     private val context: Context,
@@ -68,10 +60,10 @@ class ItemAdapter(
                 rating = "None"
             }
             holder.rating.text = "Rating: ${rating}"
-            holder.itemView.findViewById<CardView>(R.id.card_layout).setOnClickListener {
-                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(item)
-                holder.itemView.findNavController().navigate(action)
-            }
+//            holder.itemView.findViewById<CardView>(R.id.card_layout).setOnClickListener {
+//                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(item)
+//                holder.itemView.findNavController().navigate(action)
+//            }
         }
 
         /**

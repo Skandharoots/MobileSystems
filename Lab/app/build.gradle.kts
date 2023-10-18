@@ -1,9 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id ("kotlin-kapt")
+    id("kotlin-kapt")
     id("kotlin-parcelize")
-    id("androidx.navigation.safeargs")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -45,6 +45,14 @@ android {
 
 dependencies {
 
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
@@ -59,22 +67,22 @@ dependencies {
     testImplementation("org.mockito:mockito-core:3.12.4")
 
     // Navigation (omponent
-    implementation("androidx.navigation:navigation-fragment-ktx:2.2.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.2.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
 
     // Room components
-    implementation("androidx.room:room-runtime:2.2.5")
-    kapt ("androidx.room:room-compiler:2.2.5")
+    implementation("androidx.room:room-runtime:2.5.2")
+    kapt ("androidx.room:room-compiler:2.5.2")
     implementation("androidx.room:room-ktx:2.2.5")
     androidTestImplementation("androidx.room:room-testing:2.2.5")
 
     // Lifecycle components
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
     // Kotlin components
-    implementation( "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
+    implementation( "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.5")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")
 }

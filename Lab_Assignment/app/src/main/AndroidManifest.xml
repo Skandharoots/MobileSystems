@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Lab_Application"
+        android:theme="@style/Theme.Lab_Assignment"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
@@ -21,9 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TipCalculatorSite" android:exported="true"></activity>
-        <activity android:name=".AddFragment" android:exported="true"></activity>
-        <activity android:name=".ListFragment" android:exported="true"></activity>
+        <activity
+            android:name=".PlacesListFragment"
+            android:exported="true"/>
+        <activity
+            android:name=".AddEditFragment"
+            android:exported="true"/>
     </application>
 
 </manifest>

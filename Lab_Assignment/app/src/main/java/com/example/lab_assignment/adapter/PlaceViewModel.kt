@@ -1,12 +1,12 @@
-package com.example.lab_application.adapter
+package com.example.lab_assignment.adapter
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.lab_application.data.PlaceDatabase
-import com.example.lab_application.data.PlaceRepository
-import com.example.lab_application.model.Place
+import com.example.lab_assignment.data.PlaceDatabase
+import com.example.lab_assignment.data.PlaceRepository
+import com.example.lab_assignment.model.Place
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

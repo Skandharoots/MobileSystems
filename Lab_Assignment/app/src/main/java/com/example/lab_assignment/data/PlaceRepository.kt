@@ -1,17 +1,17 @@
-package com.example.lab_application.data
+package com.example.lab_assignment.data
 
 import androidx.lifecycle.LiveData
-import com.example.lab_application.model.Place
+import com.example.lab_assignment.model.Place
 
 class PlaceRepository(private val placeDao: PlaceDao) {
 
     fun getAllPlaces() : LiveData<List<Place>> = placeDao.getPlaces()
 
-    fun addPlace(place: Place) {
-        placeDao.addPlace(place)
+    suspend fun addPlace(place: Place) {
+       placeDao.addPlace(place)
     }
 
     //fun getPlaceById(id: Int) {
-     //   placeDao.getPlaceById(id)
+    //   placeDao.getPlaceById(id)
     //}
 }

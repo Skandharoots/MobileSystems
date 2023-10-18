@@ -8,6 +8,8 @@ import android.preference.PreferenceActivity.Header
 import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.lab_application.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,13 +19,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.switchViewButton.setOnClickListener{ switchToCalculator() }
-        binding.switchListButton.setOnClickListener{ switchToAffirmations() }
+
+
     }
 
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "onStart Called")
+
     }
 
     override fun onResume() {
@@ -52,13 +55,5 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun switchToCalculator() {
-        val intent = Intent(this, TipCalculatorSite::class.java)
-        startActivity(intent)
-    }
 
-    private fun switchToAffirmations() {
-        val intent = Intent(this, AffirmationView::class.java)
-        startActivity(intent)
-    }
 }

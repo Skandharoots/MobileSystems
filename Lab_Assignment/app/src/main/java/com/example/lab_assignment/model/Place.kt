@@ -1,4 +1,4 @@
-package com.example.lab_application.model
+package com.example.lab_assignment.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,4 +14,4 @@ data class Place(
     val about: String,
     val rating: Int
 //    val image: String
-    )
+)

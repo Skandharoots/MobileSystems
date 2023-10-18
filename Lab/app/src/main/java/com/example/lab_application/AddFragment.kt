@@ -1,5 +1,8 @@
 package com.example.lab_application
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -8,10 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.android.volley.toolbox.ImageLoader
 import com.example.lab_application.adapter.PlaceViewModel
 import com.example.lab_application.databinding.FragmentAddBinding
 import com.example.lab_application.databinding.FragmentListBinding
@@ -22,13 +28,15 @@ import java.util.Date
 
 class AddFragment : Fragment() {
 
-    private lateinit var  placeViewModel: PlaceViewModel
+    private lateinit var placeViewModel: PlaceViewModel
     var checkedRating: Int = 1
     private var _binding: FragmentAddBinding? = null
+    private lateinit var imageView: ImageView
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
@@ -52,17 +60,13 @@ class AddFragment : Fragment() {
     private fun insertDataToDatabase() {
         if (requireView().findViewById<RadioButton>(R.id.b1).isChecked) {
             checkedRating = 1
-        }
-        else if (requireView().findViewById<RadioButton>(R.id.b2).isChecked) {
+        } else if (requireView().findViewById<RadioButton>(R.id.b2).isChecked) {
             checkedRating = 2
-        }
-        else if (requireView().findViewById<RadioButton>(R.id.b3).isChecked) {
+        } else if (requireView().findViewById<RadioButton>(R.id.b3).isChecked) {
             checkedRating = 3
-        }
-        else if (requireView().findViewById<RadioButton>(R.id.b4).isChecked) {
+        } else if (requireView().findViewById<RadioButton>(R.id.b4).isChecked) {
             checkedRating = 4
-        }
-        else if (requireView().findViewById<RadioButton>(R.id.b5).isChecked) {
+        } else if (requireView().findViewById<RadioButton>(R.id.b5).isChecked) {
             checkedRating = 5
         }
         val city = requireView().findViewById<EditText>(R.id.city).text.toString()
@@ -84,7 +88,7 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(city: String, date: Date, about: String, rating: Int) : Boolean {
+    private fun inputCheck(city: String, date: Date, about: String, rating: Int): Boolean {
         return !(TextUtils.isEmpty(city) && date == null && TextUtils.isEmpty(about) && rating == null)
     }
 
@@ -93,3 +97,4 @@ class AddFragment : Fragment() {
         findNavController().navigate((R.id.action_addFragment_to_listFragment))
     }
 }
+

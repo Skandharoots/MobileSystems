@@ -61,7 +61,8 @@ class ItemAdapter(
             holder.textView.text = item.city.toString()
             holder.textView2.text = item.date.toString()
             holder.textView3.text = item.about.toString()
-            holder.rating.text = item.rating.toString()
+            var rating = item.rating.toString()
+            holder.rating.text = "Rating: ${rating}"
 //            holder.imageView.setImageBitmap(myBitmap)
 //            holder.imageView.setOnClickListener {
 //                val context = holder.itemView.context

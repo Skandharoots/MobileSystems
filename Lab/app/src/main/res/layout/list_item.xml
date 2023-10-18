@@ -51,16 +51,15 @@
             android:textAppearance="?attr/textAppearanceBodySmall"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_date"
-            app:layout_constraintEnd_toStartOf="@id/edit_button"/>
-        <ImageButton
-            android:id="@+id/edit_button"
-            android:layout_width="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/rating"/>
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:importantForAccessibility="yes"
-            app:srcCompat="@drawable/ic_edit_mode"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorPrimary"/>
+            app:layout_constraintTop_toBottomOf="@id/item_about"
+            android:text="@string/rating_text"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

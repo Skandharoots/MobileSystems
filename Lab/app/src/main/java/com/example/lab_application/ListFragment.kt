@@ -7,9 +7,17 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.ListFragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lab_application.adapter.ItemAdapter
+import com.example.lab_application.adapter.PlaceViewModel
 import com.example.lab_application.databinding.FragmentListBinding
+import com.example.lab_application.model.Place
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,8 +35,11 @@ class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var recyclerView: RecyclerView
 
+    private lateinit var placeViewModel: PlaceViewModel
+    private lateinit var myDataset: List<Place>
+    private lateinit var itemAdapter: ItemAdapter
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +52,16 @@ class ListFragment : Fragment() {
     ): View? {
         _binding = FragmentListBinding.inflate(inflater, container, false)
         val view = binding.root
+        val adapter = mutableListOf<Place>()
+        itemAdapter = ItemAdapter(requireContext(), adapter)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerView.adapter = itemAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        placeViewModel = ViewModelProvider(this).get(PlaceViewModel::class.java)
+        placeViewModel.readAllData.observe(viewLifecycleOwner, Observer {place ->
+            itemAdapter.setData(place)
+        })
+
         val btn = view.findViewById<FloatingActionButton>(R.id.add_place_button1)
         btn.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)

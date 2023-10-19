@@ -1,5 +1,6 @@
 package com.example.lab_application
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -61,11 +63,11 @@ class ListFragment : Fragment() {
         placeViewModel.readAllData.observe(viewLifecycleOwner, Observer {place ->
             itemAdapter.setData(place)
         })
-
         val btn = view.findViewById<FloatingActionButton>(R.id.add_place_button1)
         btn.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
+
         return view
     }
 

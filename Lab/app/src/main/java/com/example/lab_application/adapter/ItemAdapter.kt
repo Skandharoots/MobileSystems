@@ -1,5 +1,6 @@
 package com.example.lab_application.adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -10,18 +11,21 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lab_application.ListFragment
 import com.example.lab_application.ListFragmentDirections
 import com.example.lab_application.R
 import com.example.lab_application.model.Place
 import java.text.SimpleDateFormat
 
+
 class ItemAdapter(
     private val context: Context,
     private var dataset: List<Place>
     ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
-
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
@@ -42,7 +46,6 @@ class ItemAdapter(
             // create a new view
             val adapterLayout = LayoutInflater.from(parent.context)
                 .inflate(R.layout.list_item, parent, false)
-
             return ItemViewHolder(adapterLayout)
         }
 
@@ -50,6 +53,7 @@ class ItemAdapter(
          * Replace the contents of a view (invoked by the layout manager)
          */
         override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+
             val item = dataset[position]
             val spf = SimpleDateFormat("dd/mm/yyyy")
             val date = spf.format(item.date)
@@ -65,6 +69,7 @@ class ItemAdapter(
                 val action = ListFragmentDirections.actionListFragmentToUpdateFragment(item)
                 holder.itemView.findNavController().navigate(action)
             }
+
         }
 
         /**
@@ -75,5 +80,9 @@ class ItemAdapter(
         fun setData(place: List<Place>) {
             dataset = place
             notifyDataSetChanged()
+        }
+
+        fun getPlace(place: Place) : Place {
+            return place
         }
 }

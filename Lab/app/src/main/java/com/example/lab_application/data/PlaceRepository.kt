@@ -15,6 +15,10 @@ class PlaceRepository(private val placeDao: PlaceDao) {
         placeDao.updatePlace(place)
     }
 
+    fun deletePlace(place: Place) {
+        placeDao.deletePlace(place)
+    }
+
     //fun getPlaceById(id: Int) {
      //   placeDao.getPlaceById(id)
     //}

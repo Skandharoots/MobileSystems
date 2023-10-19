@@ -1,5 +1,6 @@
 package com.example.lab_application
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -66,6 +68,9 @@ class UpdateFragment : Fragment() {
         view.findViewById<MaterialButton>(R.id.cancel_place_update).setOnClickListener {
             onAbortButtonClick()
         }
+        view.findViewById<ImageView>(R.id.icon_delete).setOnClickListener {
+            deletePlace()
+        }
 
 
         return view
@@ -108,6 +113,18 @@ class UpdateFragment : Fragment() {
     private fun onAbortButtonClick() {
         Toast.makeText(requireContext(), "Updating place aborted.", Toast.LENGTH_LONG).show()
         findNavController().navigate((R.id.action_updateFragment_to_listFragment))
+    }
+
+    private fun deletePlace() {
+        val builder = AlertDialog.Builder(context)
+        builder.setPositiveButton("Yes") {_, _ ->
+            placeViewModel.deletePlace(args.currentPlace)
+            Toast.makeText(requireContext(), "Place deleted", Toast.LENGTH_LONG)
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+        }
+        builder.setNegativeButton("No") {_, _-> }
+        builder.setMessage("Do you want to delete ${args.currentPlace.city}?")
+        builder.create().show()
     }
 
 }

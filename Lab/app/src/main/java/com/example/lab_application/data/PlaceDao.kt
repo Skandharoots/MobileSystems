@@ -21,6 +21,8 @@ interface PlaceDao {
     @Update
     fun updatePlace(place: Place)
 
+    @Delete
+    fun deletePlace(place: Place)
     //@Query("SELECT * FROM places_table WHERE places_table.id=:id")
     //fun getPlaceById(id: Int)
 

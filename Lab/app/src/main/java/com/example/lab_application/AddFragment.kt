@@ -39,7 +39,7 @@ class AddFragment : Fragment() {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
 
-    private var imguri: Uri? = null
+    private var imguri: Uri = Uri.parse("")
 
     val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         // Callback is invoked after the user selects a media item or closes the
@@ -100,8 +100,9 @@ class AddFragment : Fragment() {
             about = ""
         }
         val rating = checkedRating
+
         if (inputCheck(city, date, about, rating)) {
-            val place = Place(0, city, date, about, rating)
+            val place = Place(0, city, date, about, rating, imguri)
             placeViewModel.addPlace(place)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_addFragment_to_listFragment)

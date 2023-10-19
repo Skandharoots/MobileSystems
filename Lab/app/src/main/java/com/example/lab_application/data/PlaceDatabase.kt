@@ -9,7 +9,7 @@ import com.example.lab_application.model.Place
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
 
-@Database(entities = [Place::class], version = 1, exportSchema = false)
+@Database(entities = [Place::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class PlaceDatabase : RoomDatabase() {
 

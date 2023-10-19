@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,6 +62,7 @@ class ItemAdapter(
             holder.textView2.text = date.toString()
             holder.textView3.text = item.about.toString()
             var rating = item.rating.toString()
+            holder.imageView.setImageURI(item.image)
             if (rating == "0") {
                 rating = "None"
             }

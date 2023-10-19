@@ -1,6 +1,7 @@
 package com.example.lab_application
 
 import android.app.AlertDialog
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -11,6 +12,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -28,6 +31,17 @@ class UpdateFragment : Fragment() {
     private lateinit var placeViewModel: PlaceViewModel
     private val args by navArgs<UpdateFragmentArgs>()
     private var rating: Int = 1
+    private var imguri: Uri = Uri.parse("")
+    val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        // Callback is invoked after the user selects a media item or closes the
+        // photo picker.
+        if (uri != null) {
+            Toast.makeText(requireContext(), "Photo selected", Toast.LENGTH_LONG)
+            imguri = uri
+        } else {
+            Toast.makeText(requireContext(), "No media selected", Toast.LENGTH_LONG)
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,6 +60,7 @@ class UpdateFragment : Fragment() {
         view.findViewById<TextInputEditText>(R.id.dateupdate).setText(date)
         view.findViewById<TextInputEditText>(R.id.aboutupdate).setText(args.currentPlace.about)
         rating = args.currentPlace.rating
+        imguri = args.currentPlace.image
         Toast.makeText(requireContext(), "Rating is ${rating}", Toast.LENGTH_LONG)
         if (rating == 1) {
             view.findViewById<RadioButton>(R.id.b1u).isChecked = true
@@ -70,6 +85,9 @@ class UpdateFragment : Fragment() {
         }
         view.findViewById<ImageView>(R.id.icon_delete).setOnClickListener {
             deletePlace()
+        }
+        view.findViewById<MaterialButton>(R.id.load_img_button_update).setOnClickListener {
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
 
@@ -97,7 +115,7 @@ class UpdateFragment : Fragment() {
             about = ""
         }
         if (inputCheck(city, date, about, rating)) {
-            val place = Place(args.currentPlace.id, city, date, about, rating)
+            val place = Place(args.currentPlace.id, city, date, about, rating, imguri)
             placeViewModel.updatePlace(place)
             Toast.makeText(requireContext(), "Successfully updated!", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)

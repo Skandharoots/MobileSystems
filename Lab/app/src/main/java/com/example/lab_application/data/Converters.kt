@@ -2,6 +2,7 @@ package com.example.lab_application.data
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.room.TypeConverter
 import java.io.ByteArrayOutputStream
 import java.util.Date
@@ -18,14 +19,12 @@ class Converters {
     }
 
     @TypeConverter
-    fun bitmapToBytArray(img: Bitmap): ByteArray {
-        val outputStream = ByteArrayOutputStream()
-        img.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-        return outputStream.toByteArray()
+    fun uriToString(uri: Uri): String? {
+        return uri?.toString()
     }
 
     @TypeConverter
-    fun toBitmap(bytArray: ByteArray): Bitmap {
-        return BitmapFactory.decodeByteArray(bytArray, 0, bytArray.size)
+    fun stringToUri(uri: String): Uri? {
+        return Uri.parse(uri)
     }
 }

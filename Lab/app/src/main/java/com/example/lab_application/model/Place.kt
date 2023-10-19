@@ -1,5 +1,6 @@
 package com.example.lab_application.model
 
+import android.net.Uri
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -16,6 +17,6 @@ data class Place(
     val city: String,
     val date: Date,
     val about: String,
-    val rating: Int
-//    val image: String
+    val rating: Int,
+    val image: Uri
     ) : Parcelable

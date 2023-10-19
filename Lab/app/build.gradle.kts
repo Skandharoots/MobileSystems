@@ -85,4 +85,9 @@ dependencies {
     implementation( "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.5")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")
+
+    //Activity
+    implementation("androidx.activity:activity:1.7.0")
+    implementation("androidx.activity:activity-compose:1.7.0")
+    implementation("androidx.activity:activity-ktx:1.7.0")
 }

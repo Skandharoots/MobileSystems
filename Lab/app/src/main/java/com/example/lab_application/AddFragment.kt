@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -31,14 +33,28 @@ import java.util.Date
 class AddFragment : Fragment() {
 
     private lateinit var placeViewModel: PlaceViewModel
-    var checkedRating: Int = 1
-    private var _binding: FragmentAddBinding? = null
 
+    var checkedRating: Int = 1
+
+    private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
+
+    private var imguri: Uri? = null
+
+    val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        // Callback is invoked after the user selects a media item or closes the
+        // photo picker.
+        if (uri != null) {
+            imguri = uri
+            Toast.makeText(requireContext(), "Photo selected", Toast.LENGTH_LONG)
+
+        } else {
+            Toast.makeText(requireContext(), "No media selected", Toast.LENGTH_LONG)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-
     }
 
     override fun onCreateView(
@@ -55,8 +71,9 @@ class AddFragment : Fragment() {
         binding.cancelPlace.setOnClickListener {
             onAbortButtonClick()
         }
-
-
+        binding.loadImgButton.setOnClickListener {
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
         return view
     }
 
@@ -101,6 +118,7 @@ class AddFragment : Fragment() {
         Toast.makeText(requireContext(), "Adding place aborted.", Toast.LENGTH_LONG).show()
         findNavController().navigate((R.id.action_addFragment_to_listFragment))
     }
+
 
 }
 

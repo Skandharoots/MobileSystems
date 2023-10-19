@@ -64,7 +64,7 @@ class UpdateFragment : Fragment() {
             updateItem()
         }
         view.findViewById<MaterialButton>(R.id.cancel_place_update).setOnClickListener {
-            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            onAbortButtonClick()
         }
 
 
@@ -103,6 +103,11 @@ class UpdateFragment : Fragment() {
 
     private fun inputCheck(city: String, date: Date, about: String, rating: Int): Boolean {
         return !(TextUtils.isEmpty(city) && date == null && TextUtils.isEmpty(about) && rating == null)
+    }
+
+    private fun onAbortButtonClick() {
+        Toast.makeText(requireContext(), "Updating place aborted.", Toast.LENGTH_LONG).show()
+        findNavController().navigate((R.id.action_updateFragment_to_listFragment))
     }
 
 }

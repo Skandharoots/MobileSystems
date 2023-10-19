@@ -8,6 +8,7 @@ import androidx.versionedparcelable.VersionedParcelize
 import kotlinx.parcelize.Parcelize
 import java.sql.Blob
 import java.util.Date
+import javax.annotation.Nullable
 
 @Parcelize
 @Entity(tableName = "places_table")

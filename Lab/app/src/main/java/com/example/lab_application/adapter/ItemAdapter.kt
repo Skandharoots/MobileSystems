@@ -9,9 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lab_application.ListFragmentDirections
 import com.example.lab_application.R
 import com.example.lab_application.model.Place
+import java.text.SimpleDateFormat
 
 class ItemAdapter(
     private val context: Context,
@@ -47,23 +51,20 @@ class ItemAdapter(
          */
         override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
             val item = dataset[position]
-            //val imgFile = File(item.image.toString())
-            //var myBitmap: Bitmap? = null
-//            if(imgFile.exists()) {
-//                myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-//            }
+            val spf = SimpleDateFormat("dd/mm/yyyy")
+            val date = spf.format(item.date)
             holder.textView.text = item.city.toString()
-            holder.textView2.text = item.date.toString()
+            holder.textView2.text = date.toString()
             holder.textView3.text = item.about.toString()
             var rating = item.rating.toString()
             if (rating == "0") {
                 rating = "None"
             }
             holder.rating.text = "Rating: ${rating}"
-//            holder.itemView.findViewById<CardView>(R.id.card_layout).setOnClickListener {
-//                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(item)
-//                holder.itemView.findNavController().navigate(action)
-//            }
+            holder.itemView.findViewById<CardView>(R.id.card_layout).setOnClickListener {
+                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(item)
+                holder.itemView.findNavController().navigate(action)
+            }
         }
 
         /**

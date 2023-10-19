@@ -5,56 +5,82 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AddFragment">
-    <EditText
-        android:id="@+id/city"
-        android:layout_width="match_parent"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/city_win"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:hint="City"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="City"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/date_win"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/city_win" >
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="date"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/about_win"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:hint="About"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:inputType="date"
-        android:text="Date"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/city" />
-
-    <EditText
+        app:layout_constraintTop_toBottomOf="@id/date_win" >
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
         android:inputType="text"
-        android:text="About"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date" />
-    <TextView
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rating_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/about"
-        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/about_win"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="@string/rating"/>
 
@@ -62,7 +88,7 @@
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintHorizontal_bias="0.0"

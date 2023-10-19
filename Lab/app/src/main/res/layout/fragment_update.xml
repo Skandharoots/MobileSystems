@@ -6,56 +6,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UpdateFragment">
 
-    <EditText
-        android:id="@+id/cityupdate"
-        android:layout_width="match_parent"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/updatecity_win"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:hint="City"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="City"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
+        app:layout_constraintTop_toTopOf="parent" >
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/cityupdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/updatedate_win"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:hint="Date"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/updatecity_win">
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/dateupdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="date"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/updateabout_win"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:hint="About"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:inputType="date"
-        android:text="Date"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cityupdate" />
-
-    <EditText
+        app:layout_constraintTop_toBottomOf="@id/updatedate_win" >
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/aboutupdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
         android:inputType="text"
-        android:text="About"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateupdate" />
+        />
+    </com.google.android.material.textfield.TextInputLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rating_text_update"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutupdate"
-        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/updateabout_win"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="@string/rating"/>
 

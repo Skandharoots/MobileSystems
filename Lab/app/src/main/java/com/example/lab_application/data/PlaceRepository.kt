@@ -11,6 +11,10 @@ class PlaceRepository(private val placeDao: PlaceDao) {
         placeDao.addPlace(place)
     }
 
+    fun updatePlace(place: Place) {
+        placeDao.updatePlace(place)
+    }
+
     //fun getPlaceById(id: Int) {
      //   placeDao.getPlaceById(id)
     //}

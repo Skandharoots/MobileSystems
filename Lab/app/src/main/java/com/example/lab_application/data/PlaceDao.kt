@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.lab_application.model.Place
 
 @Dao
@@ -16,6 +17,9 @@ interface PlaceDao {
 
     @Query("SELECT * FROM places_table ORDER BY date ASC")
     fun getPlaces() : LiveData<List<Place>>
+
+    @Update
+    fun updatePlace(place: Place)
 
     //@Query("SELECT * FROM places_table WHERE places_table.id=:id")
     //fun getPlaceById(id: Int)

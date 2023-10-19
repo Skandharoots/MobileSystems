@@ -27,4 +27,10 @@ class PlaceViewModel(application : Application) : AndroidViewModel(application) 
         }
     }
 
+    fun updatePlace(place: Place) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updatePlace(place)
+        }
+    }
+
 }

@@ -45,9 +45,9 @@ class AddFragment : Fragment() {
         // Callback is invoked after the user selects a media item or closes the
         // photo picker.
         if (uri != null) {
-            imguri = uri
             Toast.makeText(requireContext(), "Photo selected", Toast.LENGTH_LONG)
-
+            imguri = uri
+            requireContext().contentResolver.takePersistableUriPermission(imguri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
         } else {
             Toast.makeText(requireContext(), "No media selected", Toast.LENGTH_LONG)
         }
@@ -55,9 +55,9 @@ class AddFragment : Fragment() {
 
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -79,7 +79,6 @@ class AddFragment : Fragment() {
         }
         return view
     }
-
 
 
     private fun insertDataToDatabase() {
@@ -122,6 +121,7 @@ class AddFragment : Fragment() {
         Toast.makeText(requireContext(), "Adding place aborted.", Toast.LENGTH_LONG).show()
         findNavController().navigate((R.id.action_addFragment_to_listFragment))
     }
+
 
 
 }

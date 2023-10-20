@@ -1,6 +1,7 @@
 package com.example.lab_application
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
@@ -38,6 +39,7 @@ class UpdateFragment : Fragment() {
         if (uri != null) {
             Toast.makeText(requireContext(), "Photo selected", Toast.LENGTH_LONG)
             imguri = uri
+            requireContext().contentResolver.takePersistableUriPermission(imguri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
         } else {
             Toast.makeText(requireContext(), "No media selected", Toast.LENGTH_LONG)
         }

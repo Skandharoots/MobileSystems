@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +34,8 @@ class ItemAdapter(
         // Complex data items may need more than one view per item, and
         // you provide access to all the views for a data item in a view holder.
         // Each data item is just an Affirmation object.
+
+
         class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
             val textView: TextView = view.findViewById(R.id.item_title)
             val textView2: TextView = view.findViewById(R.id.item_date)

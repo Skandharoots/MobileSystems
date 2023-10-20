@@ -1,6 +1,7 @@
 package com.example.lab_application
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -20,10 +21,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.room.Update
 import com.example.lab_application.adapter.PlaceViewModel
+import com.example.lab_application.databinding.FragmentAddBinding
+import com.example.lab_application.databinding.FragmentUpdateBinding
 import com.example.lab_application.model.Place
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.datepicker.MaterialTextInputPicker
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 
 
@@ -31,8 +37,11 @@ class UpdateFragment : Fragment() {
 
     private lateinit var placeViewModel: PlaceViewModel
     private val args by navArgs<UpdateFragmentArgs>()
-    private var rating: Int = 1
+    private var rating: Int = 0
     private var imguri: Uri = Uri.parse("")
+    private var _binding: FragmentUpdateBinding? = null
+    private val binding get() = _binding!!
+
     val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         // Callback is invoked after the user selects a media item or closes the
         // photo picker.
@@ -54,41 +63,62 @@ class UpdateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_update, container, false)
+        _binding = FragmentUpdateBinding.inflate(inflater, container, false)
+        val view = binding.root
         placeViewModel = ViewModelProvider(this).get(PlaceViewModel::class.java)
-        view.findViewById<TextInputEditText>(R.id.cityupdate).setText(args.currentPlace.city)
+        binding.cityupdate.setText(args.currentPlace.city)
         val spf = SimpleDateFormat("dd/mm/yyyy")
         val date = spf.format(args.currentPlace.date)
-        view.findViewById<TextInputEditText>(R.id.dateupdate).setText(date)
-        view.findViewById<TextInputEditText>(R.id.aboutupdate).setText(args.currentPlace.about)
+        binding.dateupdate.setText(date)
+        binding.aboutupdate.setText(args.currentPlace.about)
         rating = args.currentPlace.rating
         imguri = args.currentPlace.image
-        Toast.makeText(requireContext(), "Rating is ${rating}", Toast.LENGTH_LONG)
+        binding.dateupdate.setOnClickListener {
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(requireContext(),
+                { view, year, monthOfYear, dayOfMonth ->
+                    // on below line we are setting
+                    // date to our edit text.
+                    val datesel = (dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year)
+                    binding.dateupdate.setText(datesel)
+                },
+                // on below line we are passing year, month
+                // and day for the selected date in our date picker.
+                year,
+                month,
+                day
+            )
+            datePickerDialog.show()
+        }
         if (rating == 1) {
-            view.findViewById<RadioButton>(R.id.b1u).isChecked = true
+            binding.b1u.isChecked = true
         }
         if (rating == 2) {
-            view.findViewById<RadioButton>(R.id.b1u).isChecked = true
+            binding.b1u.isChecked = true
         }
         if (rating == 3) {
-            view.findViewById<RadioButton>(R.id.b1u).isChecked = true
+            binding.b1u.isChecked = true
         }
         if (rating == 4) {
-            view.findViewById<RadioButton>(R.id.b1u).isChecked = true
+            binding.b1u.isChecked = true
         }
         if (rating == 5) {
-            view.findViewById<RadioButton>(R.id.b1u).isChecked = true
+            binding.b1u.isChecked = true
         }
-        view.findViewById<MaterialButton>(R.id.add_place_update).setOnClickListener {
+        binding.addPlaceUpdate.setOnClickListener {
             updateItem()
         }
-        view.findViewById<MaterialButton>(R.id.cancel_place_update).setOnClickListener {
+        binding.cancelPlaceUpdate.setOnClickListener {
             onAbortButtonClick()
         }
-        view.findViewById<ImageView>(R.id.icon_delete).setOnClickListener {
+        binding.iconDelete.setOnClickListener {
             deletePlace()
         }
-        view.findViewById<MaterialButton>(R.id.load_img_button_update).setOnClickListener {
+        binding.loadImgButtonUpdate.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
@@ -97,22 +127,22 @@ class UpdateFragment : Fragment() {
     }
 
     private fun updateItem() {
-        if (requireView().findViewById<RadioButton>(R.id.b1u).isChecked) {
+        if (binding.b1u.isChecked) {
             rating = 1
-        } else if (requireView().findViewById<RadioButton>(R.id.b2u).isChecked) {
+        } else if (binding.b2u.isChecked) {
             rating = 2
-        } else if (requireView().findViewById<RadioButton>(R.id.b3u).isChecked) {
+        } else if (binding.b3u.isChecked) {
             rating = 3
-        } else if (requireView().findViewById<RadioButton>(R.id.b4u).isChecked) {
+        } else if (binding.b4u.isChecked) {
             rating = 4
-        } else if (requireView().findViewById<RadioButton>(R.id.b5u).isChecked) {
+        } else if (binding.b5u.isChecked) {
             rating = 5
         }
-        val city = requireView().findViewById<EditText>(R.id.cityupdate).text.toString()
-        val dateEditable = requireView().findViewById<EditText>(R.id.dateupdate).text.toString()
+        val city = binding.cityupdate.text.toString()
+        val dateEditable = binding.dateupdate.text.toString()
         val sdf = SimpleDateFormat("dd/mm/yyyy")
         val date = sdf.parse(dateEditable)
-        var about = requireView().findViewById<EditText>(R.id.aboutupdate).text.toString()
+        var about = binding.aboutupdate.text.toString()
         if (about.isEmpty()) {
             about = ""
         }

@@ -38,12 +38,15 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/city_win" >
+        app:layout_constraintTop_toBottomOf="@id/city_win"
+        android:clickable="true">
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="date"
+        android:clickable="true"
+        android:focusable="false"
         />
     </com.google.android.material.textfield.TextInputLayout>
 

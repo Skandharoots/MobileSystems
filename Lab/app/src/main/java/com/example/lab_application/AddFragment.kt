@@ -1,5 +1,6 @@
 package com.example.lab_application
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -27,6 +28,7 @@ import com.example.lab_application.databinding.FragmentListBinding
 import com.example.lab_application.model.Place
 import java.net.URI
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 
 
@@ -66,10 +68,33 @@ class AddFragment : Fragment() {
     ): View? {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         val view = binding.root
+
         placeViewModel = ViewModelProvider(this).get(PlaceViewModel::class.java)
+
         val addBttn = view.findViewById<Button>(R.id.add_place)
         addBttn.setOnClickListener {
             insertDataToDatabase()
+        }
+        binding.date.setOnClickListener {
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(requireContext(),
+                { view, year, monthOfYear, dayOfMonth ->
+                    // on below line we are setting
+                    // date to our edit text.
+                    val dat = (dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year)
+                    binding.date.setText(dat)
+                },
+                // on below line we are passing year, month
+                // and day for the selected date in our date picker.
+                year,
+                month,
+                day
+            )
+            datePickerDialog.show()
         }
         binding.cancelPlace.setOnClickListener {
             onAbortButtonClick()

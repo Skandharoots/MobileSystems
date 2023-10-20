@@ -48,9 +48,12 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/updatecity_win">
+        app:layout_constraintTop_toBottomOf="@id/updatecity_win"
+        >
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/dateupdate"
+        android:clickable="true"
+        android:focusable="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="date"

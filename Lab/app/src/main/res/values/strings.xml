@@ -53,5 +53,6 @@
     <string name="add_place_button">Add Place</string>
     <string name="rating">Rating</string>
     <string name="rating_text">Rating: %s</string>
+    <string name="delete_icon">Delete</string>
 
 </resources>

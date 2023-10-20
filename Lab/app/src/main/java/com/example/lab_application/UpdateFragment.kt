@@ -49,6 +49,7 @@ class UpdateFragment : Fragment() {
             Toast.makeText(requireContext(), "Photo selected", Toast.LENGTH_LONG)
             imguri = uri
             requireContext().contentResolver.takePersistableUriPermission(imguri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            binding.imageUpdate.setImageURI(imguri)
         } else {
             Toast.makeText(requireContext(), "No media selected", Toast.LENGTH_LONG)
         }
@@ -73,6 +74,7 @@ class UpdateFragment : Fragment() {
         binding.aboutupdate.setText(args.currentPlace.about)
         rating = args.currentPlace.rating
         imguri = args.currentPlace.image
+        binding.imageUpdate.setImageURI(imguri)
         binding.dateupdate.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
@@ -97,17 +99,17 @@ class UpdateFragment : Fragment() {
         if (rating == 1) {
             binding.b1u.isChecked = true
         }
-        if (rating == 2) {
-            binding.b1u.isChecked = true
+        else if (rating == 2) {
+            binding.b2u.isChecked = true
         }
-        if (rating == 3) {
-            binding.b1u.isChecked = true
+        else if (rating == 3) {
+            binding.b3u.isChecked = true
         }
-        if (rating == 4) {
-            binding.b1u.isChecked = true
+        else if (rating == 4) {
+            binding.b4u.isChecked = true
         }
-        if (rating == 5) {
-            binding.b1u.isChecked = true
+        else if (rating == 5) {
+            binding.b5u.isChecked = true
         }
         binding.addPlaceUpdate.setOnClickListener {
             updateItem()
@@ -120,6 +122,7 @@ class UpdateFragment : Fragment() {
         }
         binding.loadImgButtonUpdate.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+
         }
 
 

@@ -50,6 +50,7 @@ class AddFragment : Fragment() {
             Toast.makeText(requireContext(), "Photo selected", Toast.LENGTH_LONG)
             imguri = uri
             requireContext().contentResolver.takePersistableUriPermission(imguri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            binding.image.setImageURI(imguri)
         } else {
             Toast.makeText(requireContext(), "No media selected", Toast.LENGTH_LONG)
         }
@@ -101,6 +102,7 @@ class AddFragment : Fragment() {
         }
         binding.loadImgButton.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+
         }
         return view
     }

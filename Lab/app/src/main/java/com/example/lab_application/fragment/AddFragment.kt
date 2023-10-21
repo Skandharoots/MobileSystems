@@ -30,7 +30,7 @@ class AddFragment : Fragment() {
 
     private lateinit var placeViewModel: PlaceViewModel
 
-    var checkedRating: Int = 1
+    var checkedRating: Int = 0
 
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!

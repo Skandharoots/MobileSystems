@@ -1,25 +1,15 @@
 package com.example.lab_application.adapter
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lab_application.ListFragment
-import com.example.lab_application.ListFragmentDirections
+import com.example.lab_application.fragment.ListFragmentDirections
 import com.example.lab_application.R
 import com.example.lab_application.model.Place
 import java.text.SimpleDateFormat

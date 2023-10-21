@@ -1,4 +1,4 @@
-package com.example.lab_application
+package com.example.lab_application.fragment
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -10,24 +10,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.room.Update
-import com.example.lab_application.adapter.PlaceViewModel
-import com.example.lab_application.databinding.FragmentAddBinding
+import com.example.lab_application.R
+import com.example.lab_application.view_model.PlaceViewModel
 import com.example.lab_application.databinding.FragmentUpdateBinding
 import com.example.lab_application.model.Place
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.datepicker.MaterialTextInputPicker
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date

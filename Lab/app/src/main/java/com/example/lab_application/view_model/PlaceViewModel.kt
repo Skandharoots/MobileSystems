@@ -1,4 +1,4 @@
-package com.example.lab_application.adapter
+package com.example.lab_application.view_model
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

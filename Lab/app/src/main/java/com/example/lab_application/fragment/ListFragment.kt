@@ -1,32 +1,21 @@
-package com.example.lab_application
+package com.example.lab_application.fragment
 
-import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.fragment.app.ListFragment
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lab_application.R
 import com.example.lab_application.adapter.ItemAdapter
-import com.example.lab_application.adapter.PlaceViewModel
 import com.example.lab_application.databinding.FragmentListBinding
 import com.example.lab_application.model.Place
+import com.example.lab_application.view_model.PlaceViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.

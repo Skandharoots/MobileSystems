@@ -1,58 +1,10 @@
 <resources>
-    <string name="app_name">Lab_Application</string>
-    <string name="tip_amount">Tip Amount: %s</string>
-    <string name="cost_of_service">Cost of Service</string>
-    <string name="service_question">How was the service?</string>
-    <string name="tip_20">Amazing (20%)</string>
-    <string name="tip_18">Good (18%)</string>
-    <string name="tip_15">Okay (15%)</string>
-    <string name="roud_up">Round up tip?</string>
-    <string name="button_text">Calculate</string>
-    <string name="random_tip">Tip Amount: 10$</string>
-    <string name="switch_to_view_2">Switch to our tip calculator here</string>
-    <string name="switch_to_view_3">Switch to our affirmation list here</string>
-    <string name="welcome_text">Welcome to Marek Kopania\'s Application\nYou can press the buttons to switch the views</string>
-    <string name="go_back">Go back</string>
-    <string name="menu_text">Menu</string>
-    <string name="tip_menu_text">Tip Calculator</string>
-    <string name="add_headline">Add A New Place</string>
-    <string name="affirmation_menu_text">Affirmations</string>
-    <string name="affirmation_welcome">Affirmations just for You</string>
-    <string name="affirmation1">Lodz</string>
-    <string name="affirmation2">Warsaw</string>
-    <string name="affirmation3">Berlin</string>
-    <string name="affirmation4">Madrid</string>
-    <string name="affirmation5">Barcelona</string>
-    <string name="affirmation6">Tallinn</string>
-    <string name="affirmation7">Lisbona</string>
-    <string name="affirmation8">Rimini</string>
-    <string name="affirmation9">Manchester</string>
-    <string name="affirmation10">London</string>
-    <string name="about1">This is the place where I live.</string>
-    <string name="about2">I\'ve been there twice and I danced in Palac Kultury.</string>
-    <string name="about3">I\'ve never been there.</string>
-    <string name="about4">I wanted to go there since always.</string>
-    <string name="about5">I love this place because of a certain football club.</string>
-    <string name="about6">I\'m going there on Erasmus programme.</string>
-    <string name="about7">I love the country and want to go there someday.</string>
-    <string name="about8">I\'ve been there once and it was amazing.</string>
-    <string name="about9">I love a certain football club there.</string>
-    <string name="about10">My aunt lives there but I never visited.</string>
-    <string name="date1">28/01/2023</string>
-    <string name="date2">30/01/2002</string>
-    <string name="date3">04/07/1999</string>
-    <string name="date4">17/10/2014</string>
-    <string name="date5">28/05/2001</string>
-    <string name="date6">05/02/2007</string>
-    <string name="date7">18/06/1994</string>
-    <string name="date8">23/04/1997</string>
-    <string name="date9">25/11/2015</string>
-    <string name="date10">30/06/2009</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Places</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_place_button">Add Place</string>
     <string name="rating">Rating</string>
     <string name="rating_text">Rating: %s</string>
     <string name="delete_icon">Delete</string>
+
 
 </resources>

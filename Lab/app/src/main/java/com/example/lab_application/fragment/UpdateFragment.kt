@@ -106,7 +106,7 @@ class UpdateFragment : Fragment() {
         binding.addPlaceUpdate.setOnClickListener {
             updateItem()
         }
-        binding.cancelPlaceUpdate.setOnClickListener {
+        binding.removeImageButtonUpdate.setOnClickListener {
             onAbortButtonClick()
         }
         binding.iconDelete.setOnClickListener {
@@ -156,8 +156,9 @@ class UpdateFragment : Fragment() {
     }
 
     private fun onAbortButtonClick() {
+        imguri = Uri.parse("")
+        binding.imageUpdate.setImageURI(imguri)
         Toast.makeText(requireContext(), "Updating place aborted.", Toast.LENGTH_LONG).show()
-        findNavController().navigate((R.id.action_updateFragment_to_listFragment))
     }
 
     private fun deletePlace() {

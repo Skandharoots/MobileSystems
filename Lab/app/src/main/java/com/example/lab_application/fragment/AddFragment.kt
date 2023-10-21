@@ -91,7 +91,7 @@ class AddFragment : Fragment() {
             )
             datePickerDialog.show()
         }
-        binding.cancelPlace.setOnClickListener {
+        binding.removeImgButton.setOnClickListener {
             onAbortButtonClick()
         }
         binding.loadImgButton.setOnClickListener {
@@ -139,8 +139,10 @@ class AddFragment : Fragment() {
     }
 
     private fun onAbortButtonClick() {
-        Toast.makeText(requireContext(), "Adding place aborted.", Toast.LENGTH_LONG).show()
-        findNavController().navigate((R.id.action_addFragment_to_listFragment))
+        imguri = Uri.parse("")
+        binding.image.setImageURI(imguri)
+        Toast.makeText(requireContext(), "Image removed", Toast.LENGTH_LONG).show()
+
     }
 
 

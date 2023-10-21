@@ -4,12 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent">
+    android:scrollbars="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:clickable="true">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:scrollbars="vertical"
     android:orientation="vertical"
     android:nestedScrollingEnabled="true"
     tools:context=".fragment.UpdateFragment"
@@ -172,7 +173,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/load_img_button_update"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Add Image"
         app:layout_constraintStart_toStartOf="parent"
@@ -181,7 +182,7 @@
         app:layout_constraintTop_toBottomOf="@id/image_update" />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/remove_image_button_update"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Remove"
         android:textColor="@color/md_theme_dark_errorContainer"

@@ -158,7 +158,7 @@ class UpdateFragment : Fragment() {
     private fun onAbortButtonClick() {
         imguri = Uri.parse("")
         binding.imageUpdate.setImageURI(imguri)
-        Toast.makeText(requireContext(), "Updating place aborted.", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), "Image removed.", Toast.LENGTH_LONG).show()
     }
 
     private fun deletePlace() {

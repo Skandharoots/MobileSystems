@@ -24,6 +24,7 @@ import com.example.lab_application.model.Place
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 
 
 class AddFragment : Fragment() {
@@ -116,26 +117,26 @@ class AddFragment : Fragment() {
         }
         val city = requireView().findViewById<EditText>(R.id.city).text.toString()
         val dateEditable = requireView().findViewById<EditText>(R.id.date).text.toString()
-        val sdf = SimpleDateFormat("dd/mm/yyyy")
-        val date = sdf.parse(dateEditable)
         var about = requireView().findViewById<EditText>(R.id.about).text.toString()
         if (about.isEmpty()) {
             about = ""
         }
         val rating = checkedRating
 
-        if (inputCheck(city, date, about, rating)) {
+        if (inputCheck(city, dateEditable)) {
+            val sdf = SimpleDateFormat("dd/mm/yyyy", Locale.UK)
+            val date = sdf.parse(dateEditable)
             val place = Place(0, city, date, about, rating, imguri)
             placeViewModel.addPlace(place)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         } else {
-            Toast.makeText(requireContext(), "Please fill out all fields", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Please fill out city and date fields", Toast.LENGTH_LONG).show()
         }
     }
 
-    private fun inputCheck(city: String, date: Date, about: String, rating: Int): Boolean {
-        return !(TextUtils.isEmpty(city) && date == null && TextUtils.isEmpty(about) && rating == null)
+    private fun inputCheck(city: String, date: String): Boolean {
+        return !(city.isEmpty() || date.isEmpty())
     }
 
     private fun onAbortButtonClick() {

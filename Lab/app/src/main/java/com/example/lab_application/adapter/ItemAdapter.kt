@@ -56,7 +56,9 @@ class ItemAdapter(
             holder.textView2.text = date.toString()
             holder.textView3.text = item.about.toString()
             var rating = item.rating.toString()
-            holder.imageView.setImageURI(item.image)
+            if (!item.image.toString().isEmpty()) {
+                holder.imageView.setImageURI(item.image)
+            }
             if (rating == "0") {
                 rating = "None"
             }

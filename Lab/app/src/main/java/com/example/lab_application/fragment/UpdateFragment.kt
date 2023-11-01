@@ -135,13 +135,13 @@ class UpdateFragment : Fragment() {
         }
         val city = binding.cityupdate.text.toString()
         val dateEditable = binding.dateupdate.text.toString()
-        val sdf = SimpleDateFormat("dd/mm/yyyy")
-        val date = sdf.parse(dateEditable)
         var about = binding.aboutupdate.text.toString()
         if (about.isEmpty()) {
             about = ""
         }
-        if (inputCheck(city, date, about, rating)) {
+        if (inputCheck(city, dateEditable, about, rating)) {
+            val sdf = SimpleDateFormat("dd/mm/yyyy")
+            val date = sdf.parse(dateEditable)
             val place = Place(args.currentPlace.id, city, date, about, rating, imguri)
             placeViewModel.updatePlace(place)
             Toast.makeText(requireContext(), "Successfully updated!", Toast.LENGTH_LONG).show()
@@ -151,8 +151,8 @@ class UpdateFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(city: String, date: Date, about: String, rating: Int): Boolean {
-        return !(TextUtils.isEmpty(city) && date == null && TextUtils.isEmpty(about) && rating == null)
+    private fun inputCheck(city: String, date: String, about: String, rating: Int): Boolean {
+        return !(city.isEmpty() || date.isEmpty())
     }
 
     private fun onAbortButtonClick() {

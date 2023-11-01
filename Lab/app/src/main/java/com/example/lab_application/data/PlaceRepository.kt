@@ -19,7 +19,4 @@ class PlaceRepository(private val placeDao: PlaceDao) {
         placeDao.deletePlace(place)
     }
 
-    //fun getPlaceById(id: Int) {
-     //   placeDao.getPlaceById(id)
-    //}
 }

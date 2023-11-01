@@ -15,7 +15,7 @@ interface PlaceDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addPlace(place: Place)
 
-    @Query("SELECT * FROM places_table ORDER BY date ASC")
+    @Query("SELECT * FROM places_table ORDER BY date DESC")
     fun getPlaces() : LiveData<List<Place>>
 
     @Update
@@ -23,7 +23,6 @@ interface PlaceDao {
 
     @Delete
     fun deletePlace(place: Place)
-    //@Query("SELECT * FROM places_table WHERE places_table.id=:id")
-    //fun getPlaceById(id: Int)
+
 
 }

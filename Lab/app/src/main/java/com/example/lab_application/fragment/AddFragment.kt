@@ -42,12 +42,12 @@ class AddFragment : Fragment() {
         // Callback is invoked after the user selects a media item or closes the
         // photo picker.
         if (uri != null) {
-            Toast.makeText(requireContext(), "Photo selected", Toast.LENGTH_LONG)
+            Toast.makeText(requireContext(), "Photo selected", Toast.LENGTH_LONG).show()
             imguri = uri
             requireContext().contentResolver.takePersistableUriPermission(imguri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
             binding.image.setImageURI(imguri)
         } else {
-            Toast.makeText(requireContext(), "No media selected", Toast.LENGTH_LONG)
+            Toast.makeText(requireContext(), "No media selected", Toast.LENGTH_LONG).show()
         }
     }
 

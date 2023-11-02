@@ -13,16 +13,16 @@ import com.example.lab_application.model.Place
 interface PlaceDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addPlace(place: Place)
+    suspend fun addPlace(place: Place)
 
     @Query("SELECT * FROM places_table ORDER BY date DESC")
     fun getPlaces() : LiveData<List<Place>>
 
     @Update
-    fun updatePlace(place: Place)
+    suspend fun updatePlace(place: Place)
 
     @Delete
-    fun deletePlace(place: Place)
+    suspend fun deletePlace(place: Place)
 
 
 }

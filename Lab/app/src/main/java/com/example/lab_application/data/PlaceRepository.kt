@@ -7,15 +7,15 @@ class PlaceRepository(private val placeDao: PlaceDao) {
 
     fun getAllPlaces() : LiveData<List<Place>> = placeDao.getPlaces()
 
-    fun addPlace(place: Place) {
+    suspend fun addPlace(place: Place) {
         placeDao.addPlace(place)
     }
 
-    fun updatePlace(place: Place) {
+    suspend fun updatePlace(place: Place) {
         placeDao.updatePlace(place)
     }
 
-    fun deletePlace(place: Place) {
+    suspend fun deletePlace(place: Place) {
         placeDao.deletePlace(place)
     }
 

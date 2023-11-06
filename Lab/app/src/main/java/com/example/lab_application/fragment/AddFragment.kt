@@ -124,7 +124,7 @@ class AddFragment : Fragment() {
         val rating = checkedRating
 
         if (inputCheck(city, dateEditable)) {
-            val sdf = SimpleDateFormat("dd/mm/yyyy", Locale.UK)
+            val sdf = SimpleDateFormat("dd/mm/yyyy")
             val date = sdf.parse(dateEditable)
             val place = Place(0, city, date, about, rating, imguri)
             placeViewModel.addPlace(place)

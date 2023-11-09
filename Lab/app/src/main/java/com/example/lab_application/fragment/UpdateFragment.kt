@@ -120,6 +120,15 @@ class UpdateFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.myToolbar.inflateMenu(R.menu.main_menu)
+        binding.myToolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        binding.myToolbar.setNavigationOnClickListener {
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+        }
+        binding.myToolbar.setTitle("Update Place")
+    }
+
     private fun updateItem() {
         if (binding.b1u.isChecked) {
             rating = 1

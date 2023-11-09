@@ -21,9 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".fragment.AddFragment" android:exported="true"></activity>
-        <activity android:name=".fragment.ListFragment" android:exported="true"></activity>
-        <activity android:name=".fragment.UpdateFragment" android:exported="true"></activity>
+
 
     </application>
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>

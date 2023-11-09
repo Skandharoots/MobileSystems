@@ -102,6 +102,15 @@ class AddFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.myToolbar.inflateMenu(R.menu.main_menu)
+        binding.myToolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        binding.myToolbar.setNavigationOnClickListener {
+            findNavController().navigate(R.id.action_addFragment_to_listFragment)
+        }
+        binding.myToolbar.setTitle("Add Place")
+    }
+
 
     private fun insertDataToDatabase() {
         if (requireView().findViewById<RadioButton>(R.id.b1).isChecked) {

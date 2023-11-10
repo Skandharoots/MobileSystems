@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -66,7 +67,18 @@ class UpdateFragment : Fragment() {
         binding.aboutupdate.setText(args.currentPlace.about)
         rating = args.currentPlace.rating
         imguri = args.currentPlace.image
-        binding.imageUpdate.setImageURI(imguri)
+        if (imguri.toString().isNotEmpty()) {
+            val file = DocumentFile.fromSingleUri(requireContext(), imguri)
+            if (file != null) {
+                if (file.exists()) {
+                    binding.imageUpdate.setImageURI(imguri)
+                } else {
+                    Toast.makeText(context, "Image not found for " + args.currentPlace.city,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
         binding.dateupdate.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)

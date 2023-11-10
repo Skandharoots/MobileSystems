@@ -1,17 +1,24 @@
 package com.example.lab_application.adapter
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.cardview.widget.CardView
+import androidx.documentfile.provider.DocumentFile
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lab_application.fragment.ListFragmentDirections
 import com.example.lab_application.R
 import com.example.lab_application.model.Place
+import java.io.File
+import java.net.URI
 import java.text.SimpleDateFormat
 
 
@@ -56,8 +63,15 @@ class ItemAdapter(
             holder.textView2.text = date.toString()
             holder.textView3.text = item.about.toString()
             var rating = item.rating.toString()
-            if (!item.image.toString().isEmpty()) {
-                holder.imageView.setImageURI(item.image)
+            if (item.image.toString().isNotEmpty()) {
+                val file = DocumentFile.fromSingleUri(context, item.image)
+                if (file != null) {
+                    if (file.exists()) {
+                        holder.imageView.setImageURI(item.image)
+                    } else {
+                        Toast.makeText(context, "Image not found for " + item.city.toString(), LENGTH_LONG).show()
+                    }
+                }
             }
             if (rating == "0") {
                 rating = "None"

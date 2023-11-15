@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.text.method.ScrollingMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -100,6 +101,7 @@ class UpdateFragment : Fragment() {
             )
             datePickerDialog.show()
         }
+        binding.aboutupdate.movementMethod = ScrollingMovementMethod()
         if (rating == 1) {
             binding.b1u.isChecked = true
         }
@@ -117,12 +119,12 @@ class UpdateFragment : Fragment() {
         }
         binding.addPlaceUpdate.setOnClickListener {
             if (binding.cityupdate.length() == 0) {
-                binding.cityupdate.error = "City required"
+                binding.updatecityWin.error = "City required"
             }
-            if (binding.dateupdate.length() == 0) {
-                binding.dateupdate.error = "Date required"
+            if (binding.dateupdate.toString().isEmpty()) {
+                binding.updatedateWin.error = "Date required"
             }
-            updateItem()
+                updateItem()
         }
         binding.removeImageButtonUpdate.setOnClickListener {
             onAbortButtonClick()

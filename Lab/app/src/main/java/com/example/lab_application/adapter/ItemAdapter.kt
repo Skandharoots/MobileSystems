@@ -2,6 +2,7 @@ package com.example.lab_application.adapter
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lab_application.fragment.ListFragmentDirections
 import com.example.lab_application.R
 import com.example.lab_application.model.Place
+import com.google.android.material.textview.MaterialTextView
 import java.io.File
 import java.net.URI
 import java.text.SimpleDateFormat

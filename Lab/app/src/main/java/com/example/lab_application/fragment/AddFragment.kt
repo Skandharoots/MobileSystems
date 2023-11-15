@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.text.method.ScrollingMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -71,10 +72,11 @@ class AddFragment : Fragment() {
         val addBttn = view.findViewById<Button>(R.id.add_place)
         addBttn.setOnClickListener {
             if (binding.city.length() == 0) {
-                binding.city.error = "City required"
+                binding.cityWin.error = "City required"
             }
             if (binding.date.length() == 0) {
-                binding.date.error = "Date required"
+                binding.dateWin.error = "Date required"
+
             }
             insertDataToDatabase()
         }
@@ -99,6 +101,7 @@ class AddFragment : Fragment() {
             )
             datePickerDialog.show()
         }
+        binding.about.movementMethod = ScrollingMovementMethod()
         binding.removeImgButton.setOnClickListener {
             onAbortButtonClick()
         }

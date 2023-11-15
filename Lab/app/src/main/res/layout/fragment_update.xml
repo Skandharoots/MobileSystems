@@ -13,6 +13,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:nestedScrollingEnabled="true"
+    android:paddingBottom="10dp"
     tools:context=".fragment.UpdateFragment"
     >
     <androidx.appcompat.widget.Toolbar
@@ -92,6 +93,10 @@
         app:layout_constraintTop_toBottomOf="@id/updatedate_win" >
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/aboutupdate"
+        android:maxLines = "6"
+        android:minLines="1"
+        android:scrollbars = "vertical"
+        android:ellipsize="end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"

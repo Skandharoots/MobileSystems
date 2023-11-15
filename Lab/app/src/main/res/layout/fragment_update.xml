@@ -186,7 +186,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/load_img_button_update"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Image"
         app:layout_constraintStart_toStartOf="parent"
@@ -195,7 +195,7 @@
         app:layout_constraintTop_toBottomOf="@id/image_update" />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/remove_image_button_update"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remove Image"
         android:textColor="@color/md_theme_dark_errorContainer"

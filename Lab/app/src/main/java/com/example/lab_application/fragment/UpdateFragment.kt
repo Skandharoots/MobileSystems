@@ -116,6 +116,12 @@ class UpdateFragment : Fragment() {
             binding.b5u.isChecked = true
         }
         binding.addPlaceUpdate.setOnClickListener {
+            if (binding.cityupdate.length() == 0) {
+                binding.cityupdate.error = "City required"
+            }
+            if (binding.dateupdate.length() == 0) {
+                binding.dateupdate.error = "Date required"
+            }
             updateItem()
         }
         binding.removeImageButtonUpdate.setOnClickListener {

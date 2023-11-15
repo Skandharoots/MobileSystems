@@ -70,6 +70,12 @@ class AddFragment : Fragment() {
 
         val addBttn = view.findViewById<Button>(R.id.add_place)
         addBttn.setOnClickListener {
+            if (binding.city.length() == 0) {
+                binding.city.error = "City required"
+            }
+            if (binding.date.length() == 0) {
+                binding.date.error = "Date required"
+            }
             insertDataToDatabase()
         }
         binding.date.setOnClickListener {

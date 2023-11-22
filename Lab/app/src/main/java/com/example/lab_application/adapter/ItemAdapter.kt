@@ -66,7 +66,7 @@ class ItemAdapter(
             holder.textView.text = item.city.toString()
             holder.textView2.text = date.toString()
             holder.textView3.text = item.about.toString()
-            holder.textView3.movementMethod = ScrollingMovementMethod()
+            holder.itemView.findViewById<MaterialTextView>(R.id.item_about).movementMethod = ScrollingMovementMethod()
             var rating = item.rating.toString()
             if (item.image.toString().isNotEmpty()) {
                 val file = DocumentFile.fromSingleUri(context, item.image)

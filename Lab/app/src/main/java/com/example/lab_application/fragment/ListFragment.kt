@@ -61,7 +61,10 @@ class ListFragment : Fragment() {
         btn.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
-
+        val btn2 = view.findViewById<FloatingActionButton>(R.id.map_button)
+        btn2.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_mapFragment)
+        }
         return view
     }
 

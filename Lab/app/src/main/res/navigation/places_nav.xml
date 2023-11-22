@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_listFragment_to_updateFragment"
             app:destination="@id/updateFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -36,5 +39,14 @@
         <argument
             android:name="currentPlace"
             app:argType="com.example.lab_application.model.Place" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.lab_application.fragment.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>

@@ -2,9 +2,11 @@
     <string name="app_name">Places</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_place_button">Add Place</string>
+    <string name="go_to_map">Show map</string>
     <string name="rating">Rating</string>
     <string name="rating_text">Rating: %s</string>
     <string name="delete_icon">Delete</string>
     <string name="go_back">Go Back</string>
+    <string name="API_KEY">AIzaSyCeYbQ3ktbbGC7bKJrDMI2BV3wrEmJv5qs</string>
 
 </resources>

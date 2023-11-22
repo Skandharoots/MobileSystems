@@ -4,6 +4,8 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+
 }
 
 android {
@@ -93,4 +95,8 @@ dependencies {
     implementation("androidx.activity:activity:1.7.0")
     implementation("androidx.activity:activity-compose:1.7.0")
     implementation("androidx.activity:activity-ktx:1.7.0")
+
+    //Maps
+
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
 }

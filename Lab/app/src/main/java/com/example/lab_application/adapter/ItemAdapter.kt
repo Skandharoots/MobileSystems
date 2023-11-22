@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.URLUtil
@@ -12,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.core.motion.utils.Utils
 import androidx.documentfile.provider.DocumentFile
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -64,6 +66,7 @@ class ItemAdapter(
             holder.textView.text = item.city.toString()
             holder.textView2.text = date.toString()
             holder.textView3.text = item.about.toString()
+            holder.textView3.movementMethod = ScrollingMovementMethod()
             var rating = item.rating.toString()
             if (item.image.toString().isNotEmpty()) {
                 val file = DocumentFile.fromSingleUri(context, item.image)

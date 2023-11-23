@@ -26,6 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
 
@@ -78,6 +79,14 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         latLng?.let { CameraUpdateFactory.newLatLngZoom(it, 12f) }?.let { myMap?.animateCamera(it) }
         if (options != null) {
             myMap?.addMarker(options)
+        }
+        myMap?.setOnMapLongClickListener {
+            val ltln = LatLng(it.latitude, it.longitude)
+            val marker = MarkerOptions().position(ltln).title("New Marker")
+            myMap?.clear()
+            myMap?.addMarker(marker)
+            Toast.makeText(requireContext(), "Marker added!", Toast.LENGTH_LONG).show()
+
         }
     }
 

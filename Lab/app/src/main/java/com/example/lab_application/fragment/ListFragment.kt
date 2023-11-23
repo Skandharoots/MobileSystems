@@ -1,11 +1,18 @@
 package com.example.lab_application.fragment
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -36,12 +43,12 @@ class ListFragment : Fragment() {
     private lateinit var itemAdapter: ItemAdapter
     private lateinit var recyclerView: RecyclerView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-
-
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,6 +72,11 @@ class ListFragment : Fragment() {
         btn2.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_mapFragment)
         }
+        if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED) {
+            getLocationPermissions()
+        }
         return view
     }
 
@@ -79,9 +91,25 @@ class ListFragment : Fragment() {
         _binding = null
     }
 
-
-
-
-
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun getLocationPermissions() {
+        val locationPermissionRequest = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                    Toast.makeText(requireContext(), "Location permission granted", Toast.LENGTH_LONG).show()
+                }
+                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                    Toast.makeText(requireContext(), "Approximate location permission granted", Toast.LENGTH_LONG).show()
+                } else -> {
+                Toast.makeText(requireContext(), "Location permission rejected", Toast.LENGTH_LONG).show()
+            }
+            }
+        }
+        locationPermissionRequest.launch(arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION))
+    }
 
 }

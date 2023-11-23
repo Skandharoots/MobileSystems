@@ -42,9 +42,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var fusedLocationProviderClient : FusedLocationProviderClient
     private var locationPermissionGranted = false
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -75,7 +75,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         var options = latLng?.let { MarkerOptions().position(it).title("Your location") }
         options?.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
         latLng?.let { CameraUpdateFactory.newLatLng(it) }?.let { myMap?.animateCamera(it) }
-        latLng?.let { CameraUpdateFactory.newLatLngZoom(it, 7f) }?.let { myMap?.animateCamera(it) }
+        latLng?.let { CameraUpdateFactory.newLatLngZoom(it, 12f) }?.let { myMap?.animateCamera(it) }
         if (options != null) {
             myMap?.addMarker(options)
         }
@@ -83,23 +83,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun getCurrentLocationUser() {
-            val locationPermissionRequest = registerForActivityResult(
-                ActivityResultContracts.RequestMultiplePermissions()
-            ) { permissions ->
-                when {
-                    permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                        Toast.makeText(requireContext(), "Location permission granted", Toast.LENGTH_LONG).show()
-                    }
-                    permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                        Toast.makeText(requireContext(), "Approximate location permission granted", Toast.LENGTH_LONG).show()
-                    } else -> {
-                    Toast.makeText(requireContext(), "Location permission rejected", Toast.LENGTH_LONG).show()
-                }
-                }
-            }
-            locationPermissionRequest.launch(arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION))
+
         if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) ==
             PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
             PackageManager.PERMISSION_GRANTED) {
@@ -111,6 +95,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         supportMapFragment.getMapAsync(this)
                     }
                 }
+        }
+        else {
+            Toast.makeText(requireContext(), "Location not permitted", Toast.LENGTH_LONG).show()
         }
     }
 

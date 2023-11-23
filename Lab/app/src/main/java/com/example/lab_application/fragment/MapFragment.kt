@@ -1,6 +1,7 @@
 package com.example.lab_application.fragment
 
 import android.Manifest
+import android.app.Dialog
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
@@ -26,6 +27,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -33,10 +35,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
+import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class MapFragment : Fragment(), OnMapReadyCallback {
+class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
 
@@ -49,6 +52,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var fusedLocationProviderClient : FusedLocationProviderClient
 
     private lateinit var markerViewModel : MarkerViewModel
+
+    private var myDialog : Dialog? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +69,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         val view = binding.root
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
         getCurrentLocationUser()
+        myDialog = Dialog(requireContext())
         return view
     }
 
@@ -107,6 +113,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             Toast.makeText(requireContext(), "Marker added!", Toast.LENGTH_LONG).show()
 
         }
+        myMap?.setOnMarkerClickListener(this)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -127,6 +134,22 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         else {
             Toast.makeText(requireContext(), "Location not permitted", Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        Toast.makeText(requireContext(), "Hello there", Toast.LENGTH_LONG).show()
+        showPopup(requireView(), marker.title.toString(), "Test about.")
+        return true
+    }
+
+    private fun showPopup(v: View, title: String, about: String) {
+        myDialog?.setContentView(R.layout.marker_popup)
+        myDialog?.findViewById<MaterialTextView>(R.id.marker_title)?.text = title
+        myDialog?.findViewById<MaterialTextView>(R.id.marker_about)?.text = about
+        myDialog?.findViewById<MaterialTextView>(R.id.exit)?.setOnClickListener {
+            myDialog?.dismiss()
+        }
+        myDialog?.show()
     }
 
 }

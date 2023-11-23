@@ -14,10 +14,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.lab_application.R
 import com.example.lab_application.databinding.FragmentListBinding
 import com.example.lab_application.databinding.FragmentMapBinding
+import com.example.lab_application.view_model.MarkerViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -29,6 +33,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class MapFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentMapBinding? = null
@@ -41,7 +47,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private var currentLocation : Location? = null
 
     private lateinit var fusedLocationProviderClient : FusedLocationProviderClient
-    private var locationPermissionGranted = false
+
+    private lateinit var markerViewModel : MarkerViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,10 +87,22 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         if (options != null) {
             myMap?.addMarker(options)
         }
+        markerViewModel = ViewModelProvider(this).get(MarkerViewModel::class.java)
+        markerViewModel.readAllData.observe(viewLifecycleOwner, Observer {markerread ->
+            for (marker in markerread) {
+                val latlng = LatLng(marker.lat, marker.lng)
+                val options2 = MarkerOptions().position(latlng).title(marker.title).contentDescription(marker.about)
+                myMap?.addMarker(options2)
+            }
+
+        })
         myMap?.setOnMapLongClickListener {
             val ltln = LatLng(it.latitude, it.longitude)
             val marker = MarkerOptions().position(ltln).title("New Marker")
-            myMap?.clear()
+            val sdf = SimpleDateFormat("dd/mm/yyyy")
+            val date = sdf.parse("23/11/2023")
+            var markerfin = com.example.lab_application.model.Marker(0, marker.title.toString(), date, "Test about", marker.position.latitude, marker.position.longitude)
+            markerViewModel.addMarker(markerfin)
             myMap?.addMarker(marker)
             Toast.makeText(requireContext(), "Marker added!", Toast.LENGTH_LONG).show()
 

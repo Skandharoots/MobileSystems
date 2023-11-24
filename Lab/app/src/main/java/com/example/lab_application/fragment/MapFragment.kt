@@ -63,6 +63,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     private var myDialog : Dialog? = null
 
+    private lateinit var currentLocMarker : com.example.lab_application.model.Marker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,15 +94,12 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     override fun onMapReady(googleMap: GoogleMap) {
         myMap = googleMap
+        markerViewModel = ViewModelProvider(this).get(MarkerViewModel::class.java)
         val latLng = currentLocation?.let { LatLng(it.latitude, it.longitude) }
         var options = latLng?.let { MarkerOptions().position(it).title("Your location") }
         options?.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
         latLng?.let { CameraUpdateFactory.newLatLng(it) }?.let { myMap?.animateCamera(it) }
-        latLng?.let { CameraUpdateFactory.newLatLngZoom(it, 12f) }?.let { myMap?.animateCamera(it) }
-        if (options != null) {
-            myMap?.addMarker(options)
-        }
-        markerViewModel = ViewModelProvider(this).get(MarkerViewModel::class.java)
+        latLng?.let { CameraUpdateFactory.newLatLngZoom(it, 14f) }?.let { myMap?.animateCamera(it) }
         markerViewModel.readAllData.observe(viewLifecycleOwner, Observer {markerread ->
             for (marker in markerread) {
                 val latlng = LatLng(marker.lat, marker.lng)

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="80dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/pin_icon"
+        android:src="@drawable/ic_map_pin"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:id="@+id/title_marker"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pin_icon"/>
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:id="@+id/date_marker"
+        app:layout_constraintTop_toBottomOf="@id/title_marker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pin_icon"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

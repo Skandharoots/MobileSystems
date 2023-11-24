@@ -3,6 +3,7 @@ package com.example.lab_application.fragment
 import android.Manifest
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.ClipData
 import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
@@ -11,13 +12,22 @@ import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ListAdapter
+import android.widget.ListView
+import android.widget.SearchView
+import android.widget.SearchView.OnQueryTextListener
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.appcompat.view.menu.MenuView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,9 +35,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.lab_application.R
+import com.example.lab_application.adapter.ItemAdapter
+import com.example.lab_application.adapter.MarkerAdapter
 import com.example.lab_application.databinding.FragmentListBinding
 import com.example.lab_application.databinding.FragmentMapBinding
+import com.example.lab_application.model.Place
 import com.example.lab_application.view_model.MarkerViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -65,6 +80,14 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     private lateinit var currentLocMarker : com.example.lab_application.model.Marker
 
+    private var searchByTitle : Boolean = true
+
+    private var searchByDate : Boolean = false
+
+    private lateinit var markerAdapter: MarkerAdapter
+    private lateinit var recyclerView: RecyclerView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -79,6 +102,16 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
         getCurrentLocationUser()
         myDialog = Dialog(requireContext())
+        val adapter = mutableListOf<com.example.lab_application.model.Marker>()
+        markerViewModel = ViewModelProvider(this).get(MarkerViewModel::class.java)
+        markerAdapter = MarkerAdapter(requireContext(), adapter)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view_marker)
+        recyclerView.adapter = markerAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        markerViewModel.readAllData.observe(viewLifecycleOwner, Observer {markers ->
+            markerAdapter.setData(markers)
+        })
+
         return view
     }
 
@@ -90,28 +123,55 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         }
         binding.myToolbar.setTitle("Map")
 
+        val menuSearchItem = binding.myToolbar.menu.findItem(R.id.search)
+        val searchView = menuSearchItem.actionView as SearchView
+        searchView.queryHint = "Type here to search..."
+        searchView.setOnQueryTextListener(object : OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+        })
+
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.search -> {
+                changeVisiblility()
+                true
+            } else ->
+                super.onOptionsItemSelected(item)
+        }
+    }
+
+
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         myMap = googleMap
-        markerViewModel = ViewModelProvider(this).get(MarkerViewModel::class.java)
         val latLng = currentLocation?.let { LatLng(it.latitude, it.longitude) }
         var options = latLng?.let { MarkerOptions().position(it).title("Your location") }
         options?.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
         latLng?.let { CameraUpdateFactory.newLatLng(it) }?.let { myMap?.animateCamera(it) }
         latLng?.let { CameraUpdateFactory.newLatLngZoom(it, 14f) }?.let { myMap?.animateCamera(it) }
-        markerViewModel.readAllData.observe(viewLifecycleOwner, Observer {markerread ->
-            for (marker in markerread) {
+        markerViewModel.readAllData.observe(viewLifecycleOwner, Observer {markers ->
+            for (marker in markers) {
                 val latlng = LatLng(marker.lat, marker.lng)
                 val options2 = MarkerOptions().position(latlng).title(marker.title).contentDescription(marker.about)
                 myMap?.addMarker(options2)
             }
-
         })
         myMap?.setOnMapLongClickListener {
             showAddMarkerPopup(requireView(), it.latitude, it.longitude)
         }
         myMap?.setOnMarkerClickListener(this)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -230,6 +290,14 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     private fun onCancelButtonClick() {
         myDialog?.dismiss()
         Toast.makeText(requireContext(), "Cancelled adding a marker.", Toast.LENGTH_LONG).show()
+    }
+
+    private fun changeVisiblility() {
+        if (binding.recyclerViewMarker.visibility == View.GONE) {
+            binding.recyclerViewMarker.visibility = View.VISIBLE
+        } else {
+            binding.recyclerViewMarker.visibility = View.GONE
+        }
     }
 
 }

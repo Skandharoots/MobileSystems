@@ -82,7 +82,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.myToolbar.inflateMenu(R.menu.main_menu)
+        binding.myToolbar.inflateMenu(R.menu.map_menu)
         binding.myToolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         binding.myToolbar.setNavigationOnClickListener {
             findNavController().navigate(R.id.action_mapFragment_to_listFragment)

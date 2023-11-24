@@ -22,6 +22,8 @@
             android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             android:background="?attr/colorPrimary"
+            app:titleTextColor="@color/black"
+            app:subtitleTextColor="@color/black"
 
             />
         <com.google.android.material.textfield.TextInputLayout

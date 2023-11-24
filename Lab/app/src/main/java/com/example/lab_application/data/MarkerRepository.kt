@@ -7,6 +7,8 @@ class MarkerRepository(private val markerDao: MarkerDao) {
 
     fun getAllMarkers() : LiveData<List<Marker>> = markerDao.getMarkers()
 
+    fun getMarker(latitude: Double, longitude: Double) : LiveData<Marker> = markerDao.getMarker(latitude, longitude)
+
     suspend fun addMarker(marker: Marker) {
         markerDao.addMarker(marker)
     }

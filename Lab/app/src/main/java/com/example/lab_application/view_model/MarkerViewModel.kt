@@ -21,6 +21,9 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
         readAllData = repository.getAllMarkers()
     }
 
+    fun getMarker(latitude: Double, longitude: Double): LiveData<Marker> {
+        return repository.getMarker(latitude, longitude)
+    }
     fun addMarker(marker: Marker) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addMarker(marker)

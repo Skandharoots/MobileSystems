@@ -19,6 +19,9 @@ interface MarkerDao {
     @Query("SELECT * FROM markers_table")
     fun getMarkers() : LiveData<List<Marker>>
 
+    @Query("SELECT * FROM markers_table WHERE lat = :latitude AND lng = :longitude")
+    fun getMarker(latitude: Double, longitude: Double) : LiveData<Marker>
+
     @Update
     suspend fun updateMarker(marker: Marker)
 

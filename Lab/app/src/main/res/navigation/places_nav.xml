@@ -48,5 +48,19 @@
         <action
             android:id="@+id/action_mapFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_updateMarkerFragment"
+            app:destination="@id/updateMarkerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateMarkerFragment"
+        android:name="com.example.lab_application.fragment.UpdateMarkerFragment"
+        android:label="UpdateMarkerFragment" >
+        <action
+            android:id="@+id/action_updateMarkerFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <argument
+            android:name="currentMarker"
+            app:argType="com.example.lab_application.model.Marker" />
     </fragment>
 </navigation>

@@ -1,18 +1,24 @@
 package com.example.lab_application.fragment
 
 import android.Manifest
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
@@ -35,8 +41,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
+import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -103,15 +111,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
         })
         myMap?.setOnMapLongClickListener {
-            val ltln = LatLng(it.latitude, it.longitude)
-            val marker = MarkerOptions().position(ltln).title("New Marker")
-            val sdf = SimpleDateFormat("dd/mm/yyyy")
-            val date = sdf.parse("23/11/2023")
-            var markerfin = com.example.lab_application.model.Marker(0, marker.title.toString(), date, "Test about", marker.position.latitude, marker.position.longitude)
-            markerViewModel.addMarker(markerfin)
-            myMap?.addMarker(marker)
-            Toast.makeText(requireContext(), "Marker added!", Toast.LENGTH_LONG).show()
-
+            showAddMarkerPopup(requireView(), it.latitude, it.longitude)
         }
         myMap?.setOnMarkerClickListener(this)
     }
@@ -137,19 +137,101 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        Toast.makeText(requireContext(), "Hello there", Toast.LENGTH_LONG).show()
-        showPopup(requireView(), marker.title.toString(), "Test about.")
+        markerViewModel.getMarker(marker.position.latitude, marker.position.longitude).observe(viewLifecycleOwner
+        ) { markerData ->
+            showPopup(requireView(), markerData)
+        }
+
         return true
     }
 
-    private fun showPopup(v: View, title: String, about: String) {
+    private fun showPopup(v: View, marker: com.example.lab_application.model.Marker) {
         myDialog?.setContentView(R.layout.marker_popup)
-        myDialog?.findViewById<MaterialTextView>(R.id.marker_title)?.text = title
-        myDialog?.findViewById<MaterialTextView>(R.id.marker_about)?.text = about
+        myDialog?.findViewById<MaterialTextView>(R.id.marker_title)?.text = marker.title
+        myDialog?.findViewById<MaterialTextView>(R.id.marker_about)?.text = marker.about
+        myDialog?.findViewById<MaterialTextView>(R.id.exit)?.setOnClickListener {
+            myDialog?.dismiss()
+        }
+        myDialog?.findViewById<ConstraintLayout>(R.id.marker_popup_window)?.setOnClickListener {
+            val action = MapFragmentDirections.actionMapFragmentToUpdateMarkerFragment(marker)
+            findNavController().navigate(action)
+            myDialog?.dismiss()
+        }
+        myDialog?.show()
+    }
+
+    private fun showAddMarkerPopup(v: View, lat: Double, lng: Double) {
+        myDialog?.setContentView(R.layout.add_marker_popup)
+        myDialog?.findViewById<EditText>(R.id.date)?.setOnClickListener {
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(requireContext(),
+                { view, year, monthOfYear, dayOfMonth ->
+                    // on below line we are setting
+                    // date to our edit text.
+                    val dat = (dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year)
+                    myDialog?.findViewById<EditText>(R.id.date)?.setText(dat)
+                },
+                // on below line we are passing year, month
+                // and day for the selected date in our date picker.
+                year,
+                month,
+                day
+            )
+            datePickerDialog.show()
+        }
+        myDialog?.findViewById<EditText>(R.id.about)?.movementMethod = ScrollingMovementMethod()
+        myDialog?.findViewById<Button>(R.id.add_marker_button)?.setOnClickListener {
+            if (myDialog?.findViewById<EditText>(R.id.title)?.length() == 0) {
+                myDialog?.findViewById<TextInputLayout>(R.id.title_win)?.error = "Title required"
+                //myDialog?.show()
+            }
+            if (myDialog?.findViewById<EditText>(R.id.date)?.length() == 0) {
+                myDialog?.findViewById<TextInputLayout>(R.id.date_win)?.error = "Date required"
+                //myDialog?.show()
+            } else {
+                insertMarkerIntoDatabase(lat, lng)
+            }
+        }
+        myDialog?.findViewById<Button>(R.id.cancel_add_button)?.setOnClickListener {
+            onCancelButtonClick()
+        }
         myDialog?.findViewById<MaterialTextView>(R.id.exit)?.setOnClickListener {
             myDialog?.dismiss()
         }
         myDialog?.show()
+
+    }
+
+    private fun insertMarkerIntoDatabase(lat: Double, lng: Double) {
+        val title = myDialog?.findViewById<EditText>(R.id.title)?.text.toString()
+        val dateEditable = myDialog?.findViewById<EditText>(R.id.date)?.text.toString()
+        var about = myDialog?.findViewById<EditText>(R.id.about)?.text.toString()
+        if (about.isEmpty()) {
+            about = ""
+        }
+        val sdf = SimpleDateFormat("dd/mm/yyyy")
+        val date = sdf.parse(dateEditable)
+        if (inputCheck(title, dateEditable)) {
+            val marker = com.example.lab_application.model.Marker(0, title, date, about, lat, lng)
+            markerViewModel.addMarker(marker)
+            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
+            myDialog?.dismiss()
+        } else {
+            Toast.makeText(requireContext(), "Please fill out title and date fields", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun inputCheck(title: String, date: String): Boolean {
+        return !(title.isEmpty() || date.isEmpty())
+    }
+
+    private fun onCancelButtonClick() {
+        myDialog?.dismiss()
+        Toast.makeText(requireContext(), "Cancelled adding a marker.", Toast.LENGTH_LONG).show()
     }
 
 }

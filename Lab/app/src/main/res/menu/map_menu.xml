@@ -19,8 +19,4 @@
         android:title="Sort by description"
         app:showAsAction="never"
         />
-
-
-
-
 </menu>

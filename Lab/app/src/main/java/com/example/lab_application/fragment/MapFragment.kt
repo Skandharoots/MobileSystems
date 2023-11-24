@@ -122,14 +122,28 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             findNavController().navigate(R.id.action_mapFragment_to_listFragment)
         }
         binding.myToolbar.setTitle("Map")
-
+        binding.myToolbar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.search -> {
+                    changeVisiblilityToVisible()
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
         val menuSearchItem = binding.myToolbar.menu.findItem(R.id.search)
         val searchView = menuSearchItem.actionView as SearchView
         searchView.queryHint = "Type here to search..."
+        searchView.setOnCloseListener {
+            changeVisiblilityToGone()
+            true
+        }
         searchView.setOnQueryTextListener(object : OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
+                changeVisiblilityToVisible()
                 return false
             }
 
@@ -139,18 +153,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         })
 
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.search -> {
-                changeVisiblility()
-                true
-            } else ->
-                super.onOptionsItemSelected(item)
-        }
-    }
-
-
 
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -292,11 +294,21 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         Toast.makeText(requireContext(), "Cancelled adding a marker.", Toast.LENGTH_LONG).show()
     }
 
-    private fun changeVisiblility() {
-        if (binding.recyclerViewMarker.visibility == View.GONE) {
+    private fun changeVisiblilityToVisible() : Boolean {
+        return if (binding.recyclerViewMarker.visibility == View.GONE) {
             binding.recyclerViewMarker.visibility = View.VISIBLE
+            true
         } else {
+            false
+        }
+    }
+
+    private fun changeVisiblilityToGone() : Boolean {
+        return if (binding.recyclerViewMarker.visibility == View.VISIBLE) {
             binding.recyclerViewMarker.visibility = View.GONE
+            true
+        } else {
+            false
         }
     }
 

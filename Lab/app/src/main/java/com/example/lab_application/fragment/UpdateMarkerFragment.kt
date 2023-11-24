@@ -98,7 +98,7 @@ class UpdateMarkerFragment : Fragment() {
         binding.myToolbar.inflateMenu(R.menu.main_menu)
         binding.myToolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         binding.myToolbar.setNavigationOnClickListener {
-            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            findNavController().navigate(R.id.action_updateMarkerFragment_to_mapFragment)
         }
         binding.myToolbar.setTitle("Update Marker")
     }

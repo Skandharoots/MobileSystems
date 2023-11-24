@@ -21,10 +21,6 @@
         android:layout_height="60dp"
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="?attr/colorPrimary"
-        app:titleTextColor="@color/black"
-        app:subtitleTextColor="@color/black"
-
         />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/updatecity_win"
@@ -46,8 +42,8 @@
     </com.google.android.material.textfield.TextInputLayout>
     <ImageView
         android:id="@+id/icon_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:importantForAccessibility="yes"
         app:srcCompat="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"

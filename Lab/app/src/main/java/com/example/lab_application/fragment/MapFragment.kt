@@ -108,15 +108,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
         getCurrentLocationUser()
         myDialog = Dialog(requireContext())
-        val adapter = mutableListOf<com.example.lab_application.model.Marker>()
-        markerViewModel = ViewModelProvider(this).get(MarkerViewModel::class.java)
-        markerAdapter = MarkerAdapter(requireContext(), adapter)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view_marker)
-        recyclerView.adapter = markerAdapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        markerViewModel.readAllData.observe(viewLifecycleOwner, Observer {markers ->
-            markerAdapter.setData(markers)
-        })
 
         return view
     }
@@ -199,12 +190,19 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         options?.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
         latLng?.let { CameraUpdateFactory.newLatLng(it) }?.let { myMap?.animateCamera(it) }
         latLng?.let { CameraUpdateFactory.newLatLngZoom(it, 14f) }?.let { myMap?.animateCamera(it) }
+        val adapter = mutableListOf<com.example.lab_application.model.Marker>()
+        markerViewModel = ViewModelProvider(this).get(MarkerViewModel::class.java)
+        markerAdapter = MarkerAdapter(requireContext(), adapter, myMap)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_view_marker)
+        recyclerView?.adapter = markerAdapter
+        recyclerView?.layoutManager = LinearLayoutManager(requireContext())
         markerViewModel.readAllData.observe(viewLifecycleOwner, Observer {markers ->
             for (marker in markers) {
                 val latlng = LatLng(marker.lat, marker.lng)
-                val options2 = MarkerOptions().position(latlng).title(marker.title).contentDescription(marker.about)
+                val options2 = MarkerOptions().position(latlng).title(marker.title).contentDescription(marker.about).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                 myMap?.addMarker(options2)
             }
+            markerAdapter.setData(markers)
         })
         myMap?.setOnMapLongClickListener {
             showAddMarkerPopup(requireView(), it.latitude, it.longitude)

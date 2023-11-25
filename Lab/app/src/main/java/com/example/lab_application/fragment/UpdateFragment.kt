@@ -67,7 +67,7 @@ class UpdateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         val view = binding.root
         placeViewModel = ViewModelProvider(this).get(PlaceViewModel::class.java)
         binding.cityupdate.setText(args.currentPlace.city)
-        val spf = SimpleDateFormat("dd/mm/yyyy")
+        val spf = SimpleDateFormat("dd/MM/yyyy")
         val date = spf.format(args.currentPlace.date)
         binding.dateupdate.setText(date)
         binding.aboutupdate.setText(args.currentPlace.about)

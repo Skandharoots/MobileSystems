@@ -2,6 +2,7 @@ package com.example.lab_application.data
 
 import androidx.lifecycle.LiveData
 import com.example.lab_application.model.Marker
+import java.util.Date
 
 class MarkerRepository(private val markerDao: MarkerDao) {
 
@@ -12,6 +13,8 @@ class MarkerRepository(private val markerDao: MarkerDao) {
     fun searchDatabaseByTitle(searchQuery: String) : LiveData<List<Marker>> = markerDao.searchDatabaseByTitle(searchQuery)
 
     fun searchDatabaseByDescription(searchQuery: String) : LiveData<List<Marker>> = markerDao.searchDatabaseByDescription(searchQuery)
+
+    fun searchDatabaseByEvent(currentDate: Date) : LiveData<List<Marker>> = markerDao.searchDatabaseByEvent(currentDate)
 
     suspend fun addMarker(marker: Marker) {
         markerDao.addMarker(marker)

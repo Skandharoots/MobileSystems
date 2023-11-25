@@ -4,12 +4,14 @@ import android.Manifest
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.ClipData
+import android.content.ContentValues.TAG
 import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -59,8 +61,10 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private var _binding: FragmentMapBinding? = null
@@ -83,6 +87,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     private var searchByTitle : Boolean = true
 
     private var searchByDescription : Boolean = false
+
+    private var upcomingEvents : Boolean = false
 
     private lateinit var markerAdapter: MarkerAdapter
 
@@ -138,6 +144,18 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                     searchByDescription = true
                     true
                 }
+                R.id.upcoming -> {
+                    if (!upcomingEvents) {
+                        val currentDate = Calendar.getInstance().time
+                        filterByEvent(currentDate)
+                        upcomingEvents = true
+                        true
+                    } else {
+                        getDefaultDatabase()
+                        upcomingEvents = false
+                        true
+                    }
+                }
                 else -> {
                     false
                 }
@@ -179,6 +197,18 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     private fun searchByDescription(searchQuery: String) {
         val search = "%$searchQuery%"
         markerViewModel.searchDatabaseByDescription(search).observe(viewLifecycleOwner) { markers ->
+            markerAdapter.setData(markers)
+        }
+    }
+
+    private fun filterByEvent(currentDate: Date) {
+        markerViewModel.searchDatabaseByEvent(currentDate).observe(viewLifecycleOwner) { markers ->
+            markerAdapter.setData(markers)
+        }
+    }
+
+    private fun getDefaultDatabase() {
+        markerViewModel.readAllData.observe(viewLifecycleOwner) { markers ->
             markerAdapter.setData(markers)
         }
     }
@@ -258,10 +288,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             val day = c.get(Calendar.DAY_OF_MONTH)
 
             val datePickerDialog = DatePickerDialog(requireContext(),
-                { view, year, monthOfYear, dayOfMonth ->
+                { view, yearr, monthh, dayy ->
                     // on below line we are setting
                     // date to our edit text.
-                    val dat = (dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year)
+                    val dat = (dayy.toString() + "/" + (monthh + 1) + "/" + yearr)
+                    Log.d(TAG, "Date: " + dat)
                     myDialog?.findViewById<EditText>(R.id.date)?.setText(dat)
                 },
                 // on below line we are passing year, month
@@ -302,7 +333,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         if (about.isEmpty()) {
             about = ""
         }
-        val sdf = SimpleDateFormat("dd/mm/yyyy")
+        val sdf = SimpleDateFormat("dd/mm/yyyy", Locale.UK)
         val date = sdf.parse(dateEditable)
         if (inputCheck(title, dateEditable)) {
             val marker = com.example.lab_application.model.Marker(0, title, date, about, lat, lng)

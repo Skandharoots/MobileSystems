@@ -24,6 +24,7 @@ import com.google.android.material.textview.MaterialTextView
 import java.io.File
 import java.net.URI
 import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 class ItemAdapter(
@@ -61,7 +62,7 @@ class ItemAdapter(
         override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
             val item = dataset[position]
-            val spf = SimpleDateFormat("dd/mm/yyyy")
+            val spf = SimpleDateFormat("dd/MM/yyyy", Locale.UK)
             val date = spf.format(item.date)
             holder.textView.text = item.city.toString()
             holder.textView2.text = date.toString()

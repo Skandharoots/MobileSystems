@@ -16,7 +16,7 @@ data class Place(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val city: String,
-    val date: Date,
+    val date: Long,
     val about: String,
     val rating: Int,
     val image: Uri

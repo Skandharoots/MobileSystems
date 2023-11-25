@@ -9,6 +9,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.lab_application.model.Marker
 import com.example.lab_application.model.Place
+import java.util.Date
 
 @Dao
 interface MarkerDao {
@@ -33,4 +34,8 @@ interface MarkerDao {
 
     @Query("SELECT * FROM markers_table WHERE about LIKE :searchQuery")
     fun searchDatabaseByDescription(searchQuery: String) : LiveData<List<Marker>>
+
+    @Query("SELECT * FROM markers_table WHERE date / 1000 * 60 * 60 > :currentDate / 1000 * 60 * 60")
+    fun searchDatabaseByEvent(currentDate: Date) : LiveData<List<Marker>>
+
 }

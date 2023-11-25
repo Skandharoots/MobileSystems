@@ -10,18 +10,15 @@
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.widget.SearchView"
     />
+    <item android:id="@+id/by_description"
+        android:title="Sort by description"
+        app:showAsAction="never"
+        />
     <item android:id="@+id/search_by_title"
         android:title="Search by title"
         app:showAsAction="never"/>
     <item android:id="@+id/search_by_description"
         android:title="Search by description"
         app:showAsAction="never"/>
-    <item android:id="@+id/by_title"
-        android:title="Sort by title"
-        app:showAsAction="never"
-        />
-    <item android:id="@+id/by_description"
-        android:title="Sort by description"
-        app:showAsAction="never"
-        />
+
 </menu>

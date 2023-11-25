@@ -9,6 +9,7 @@ import com.example.lab_application.data.PlaceDatabase
 import com.example.lab_application.model.Marker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class MarkerViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -31,6 +32,10 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
 
     fun searchDatabaseByDescription(searchQuery : String) : LiveData<List<Marker>> {
         return repository.searchDatabaseByDescription(searchQuery)
+    }
+
+    fun searchDatabaseByEvent(currentDate: Date) : LiveData<List<Marker>> {
+        return repository.searchDatabaseByEvent(currentDate)
     }
 
     fun addMarker(marker: Marker) {

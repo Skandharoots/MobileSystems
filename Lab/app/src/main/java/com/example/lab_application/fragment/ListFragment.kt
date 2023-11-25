@@ -82,7 +82,7 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
-        binding.myToolbar.inflateMenu(R.menu.main_menu)
+        binding.myToolbar.inflateMenu(R.menu.recycler_menu)
         binding.myToolbar.setTitle("Places")
     }
 

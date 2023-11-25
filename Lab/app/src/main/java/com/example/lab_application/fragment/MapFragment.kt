@@ -125,7 +125,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         binding.myToolbar.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.search -> {
-                    changeVisiblilityToVisible()
+                    changeVisibilityToVisible()
                     true
                 }
                 R.id.search_by_title -> {
@@ -147,13 +147,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         val searchView = menuSearchItem.actionView as SearchView
         searchView.queryHint = "Type here to search..."
         searchView.setOnCloseListener {
-            changeVisiblilityToGone()
+            changeVisibilityToGone()
             true
         }
         searchView.setOnQueryTextListener(object : OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                changeVisiblilityToVisible()
+                changeVisibilityToVisible()
                 if (newText != null && searchByTitle) {
                     searchByTitle(newText)
                 } else if (newText != null && searchByDescription) {
@@ -323,7 +323,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         Toast.makeText(requireContext(), "Cancelled adding a marker.", Toast.LENGTH_LONG).show()
     }
 
-    private fun changeVisiblilityToVisible() : Boolean {
+    private fun changeVisibilityToVisible() : Boolean {
         return if (binding.recyclerViewMarker.visibility == View.GONE) {
             binding.recyclerViewMarker.visibility = View.VISIBLE
             true
@@ -332,7 +332,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         }
     }
 
-    private fun changeVisiblilityToGone() : Boolean {
+    private fun changeVisibilityToGone() : Boolean {
         return if (binding.recyclerViewMarker.visibility == View.VISIBLE) {
             binding.recyclerViewMarker.visibility = View.GONE
             true

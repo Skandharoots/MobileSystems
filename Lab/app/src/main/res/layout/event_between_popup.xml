@@ -10,7 +10,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:id="@+id/exit"
+        android:id="@+id/exit_events"
         android:text="X"
         android:textStyle="bold"
         android:textColor="?attr/colorAccent"

@@ -136,6 +136,10 @@ class ListFragment : Fragment(){
 
     private fun showPopup(v: View) {
         myDialog?.setContentView(R.layout.event_between_popup)
+        myDialog?.findViewById<MaterialTextView>(R.id.exit_events)?.setOnClickListener {
+            myDialog?.dismiss()
+            betweenEvents = false
+        }
         myDialog?.findViewById<EditText>(R.id.datestart)?.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)

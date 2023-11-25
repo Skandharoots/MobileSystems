@@ -12,6 +12,7 @@ import com.example.lab_application.model.Marker
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.card.MaterialCardView
 import java.text.SimpleDateFormat
 
 class MarkerAdapter(
@@ -28,7 +29,7 @@ class MarkerAdapter(
 
     class MarkerViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title_marker)
-        val date: TextView = view.findViewById(R.id.date_marker)
+        val about: TextView = view.findViewById(R.id.about_marker)
     }
 
     /**
@@ -46,10 +47,8 @@ class MarkerAdapter(
      */
     override fun onBindViewHolder(holder: MarkerViewHolder, position: Int) {
         val item = dataset[position]
-        val spf = SimpleDateFormat("dd/MM/yyyy")
-        val date = spf.format(item.date)
-        holder.title.text = "Title: " + item.title.toString()
-        holder.date.text = "Date: " + date.toString()
+        holder.title.text = item.title.toString()
+        holder.about.text = item.about.toString()
         holder.itemView.findViewById<ConstraintLayout>(R.id.marker_item).setOnClickListener {
             val latlng = LatLng(item.lat, item.lng)
             myMap?.animateCamera(CameraUpdateFactory.newLatLng(latlng))

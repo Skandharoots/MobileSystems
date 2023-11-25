@@ -82,10 +82,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     private var searchByTitle : Boolean = true
 
-    private var searchByDate : Boolean = false
+    private var searchByDescription : Boolean = false
 
     private lateinit var markerAdapter: MarkerAdapter
-    private lateinit var recyclerView: RecyclerView
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,6 +128,16 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                     changeVisiblilityToVisible()
                     true
                 }
+                R.id.search_by_title -> {
+                    searchByTitle = true
+                    searchByDescription = false
+                    true
+                }
+                R.id.search_by_description -> {
+                    searchByTitle = false
+                    searchByDescription = true
+                    true
+                }
                 else -> {
                     false
                 }
@@ -144,6 +154,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 changeVisiblilityToVisible()
+                if (newText != null && searchByTitle) {
+                    searchByTitle(newText)
+                } else if (newText != null && searchByDescription) {
+                    searchByDescription(newText)
+                }
                 return false
             }
 
@@ -152,6 +167,20 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             }
         })
 
+    }
+
+    private fun searchByTitle(searchQuery: String) {
+        val search = "%$searchQuery%"
+        markerViewModel.searchDatabaseByTitle(search).observe(viewLifecycleOwner) { markers ->
+            markerAdapter.setData(markers)
+        }
+    }
+
+    private fun searchByDescription(searchQuery: String) {
+        val search = "%$searchQuery%"
+        markerViewModel.searchDatabaseByDescription(search).observe(viewLifecycleOwner) { markers ->
+            markerAdapter.setData(markers)
+        }
     }
 
 
@@ -311,5 +340,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             false
         }
     }
+
 
 }

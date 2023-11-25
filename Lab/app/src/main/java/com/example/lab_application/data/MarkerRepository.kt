@@ -9,6 +9,10 @@ class MarkerRepository(private val markerDao: MarkerDao) {
 
     fun getMarker(latitude: Double, longitude: Double) : LiveData<Marker> = markerDao.getMarker(latitude, longitude)
 
+    fun searchDatabaseByTitle(searchQuery: String) : LiveData<List<Marker>> = markerDao.searchDatabaseByTitle(searchQuery)
+
+    fun searchDatabaseByDescription(searchQuery: String) : LiveData<List<Marker>> = markerDao.searchDatabaseByDescription(searchQuery)
+
     suspend fun addMarker(marker: Marker) {
         markerDao.addMarker(marker)
     }

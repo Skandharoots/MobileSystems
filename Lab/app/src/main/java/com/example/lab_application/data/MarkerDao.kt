@@ -27,4 +27,10 @@ interface MarkerDao {
 
     @Delete
     suspend fun deleteMarker(marker: Marker)
+
+    @Query("SELECT * FROM markers_table WHERE title LIKE :searchQuery")
+    fun searchDatabaseByTitle(searchQuery: String) : LiveData<List<Marker>>
+
+    @Query("SELECT * FROM markers_table WHERE about LIKE :searchQuery")
+    fun searchDatabaseByDescription(searchQuery: String) : LiveData<List<Marker>>
 }

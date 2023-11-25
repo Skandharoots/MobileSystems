@@ -24,6 +24,15 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
     fun getMarker(latitude: Double, longitude: Double): LiveData<Marker> {
         return repository.getMarker(latitude, longitude)
     }
+
+    fun searchDatabaseByTitle(searchQuery : String) : LiveData<List<Marker>> {
+        return repository.searchDatabaseByTitle(searchQuery)
+    }
+
+    fun searchDatabaseByDescription(searchQuery : String) : LiveData<List<Marker>> {
+        return repository.searchDatabaseByDescription(searchQuery)
+    }
+
     fun addMarker(marker: Marker) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addMarker(marker)

@@ -6,9 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.lab_application.data.PlaceDatabase
 import com.example.lab_application.data.PlaceRepository
+import com.example.lab_application.model.Marker
 import com.example.lab_application.model.Place
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class PlaceViewModel(application : Application) : AndroidViewModel(application) {
 
@@ -19,6 +21,14 @@ class PlaceViewModel(application : Application) : AndroidViewModel(application) 
         val placeDao = PlaceDatabase.getDatabase(application).placeDao()
         repository = PlaceRepository(placeDao)
         readAllData = repository.getAllPlaces()
+    }
+
+    fun searchDatabaseByEvent(currentDate: Long) : LiveData<List<Place>> {
+        return repository.searchDatabaseByEvent(currentDate)
+    }
+
+    fun searchDatabaseBetweenEvents(start: Long, end: Long) : LiveData<List<Place>> {
+        return repository.searchDatabaseBetweenEvents(start, end)
     }
 
     fun addPlace(place: Place) {

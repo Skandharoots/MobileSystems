@@ -14,8 +14,6 @@ class MarkerRepository(private val markerDao: MarkerDao) {
 
     fun searchDatabaseByDescription(searchQuery: String) : LiveData<List<Marker>> = markerDao.searchDatabaseByDescription(searchQuery)
 
-    fun searchDatabaseByEvent(currentDate: Date) : LiveData<List<Marker>> = markerDao.searchDatabaseByEvent(currentDate)
-
     suspend fun addMarker(marker: Marker) {
         markerDao.addMarker(marker)
     }

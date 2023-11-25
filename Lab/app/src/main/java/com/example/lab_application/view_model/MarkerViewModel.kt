@@ -34,10 +34,6 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
         return repository.searchDatabaseByDescription(searchQuery)
     }
 
-    fun searchDatabaseByEvent(currentDate: Date) : LiveData<List<Marker>> {
-        return repository.searchDatabaseByEvent(currentDate)
-    }
-
     fun addMarker(marker: Marker) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addMarker(marker)

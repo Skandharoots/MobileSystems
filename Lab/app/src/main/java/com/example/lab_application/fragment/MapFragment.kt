@@ -144,18 +144,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                     searchByDescription = true
                     true
                 }
-                R.id.upcoming -> {
-                    if (!upcomingEvents) {
-                        val currentDate = Calendar.getInstance().time
-                        filterByEvent(currentDate)
-                        upcomingEvents = true
-                        true
-                    } else {
-                        getDefaultDatabase()
-                        upcomingEvents = false
-                        true
-                    }
-                }
                 else -> {
                     false
                 }
@@ -201,17 +189,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         }
     }
 
-    private fun filterByEvent(currentDate: Date) {
-        markerViewModel.searchDatabaseByEvent(currentDate).observe(viewLifecycleOwner) { markers ->
-            markerAdapter.setData(markers)
-        }
-    }
 
-    private fun getDefaultDatabase() {
-        markerViewModel.readAllData.observe(viewLifecycleOwner) { markers ->
-            markerAdapter.setData(markers)
-        }
-    }
 
 
     override fun onMapReady(googleMap: GoogleMap) {

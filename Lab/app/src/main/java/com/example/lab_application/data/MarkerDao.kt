@@ -35,7 +35,6 @@ interface MarkerDao {
     @Query("SELECT * FROM markers_table WHERE about LIKE :searchQuery")
     fun searchDatabaseByDescription(searchQuery: String) : LiveData<List<Marker>>
 
-    @Query("SELECT * FROM markers_table WHERE date / 1000 * 60 * 60 > :currentDate / 1000 * 60 * 60")
-    fun searchDatabaseByEvent(currentDate: Date) : LiveData<List<Marker>>
+
 
 }

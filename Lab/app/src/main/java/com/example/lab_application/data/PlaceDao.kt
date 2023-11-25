@@ -7,7 +7,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.example.lab_application.model.Marker
 import com.example.lab_application.model.Place
+import java.util.Date
 
 @Dao
 interface PlaceDao {
@@ -24,5 +26,10 @@ interface PlaceDao {
     @Delete
     suspend fun deletePlace(place: Place)
 
+    @Query("SELECT * FROM places_table WHERE date > :currentDate")
+    fun searchDatabaseByEvent(currentDate: Long) : LiveData<List<Place>>
+
+    @Query("SELECT * FROM places_table WHERE date BETWEEN :start AND :end")
+    fun searchDatabaseBetweenEvents(start: Long, end: Long) : LiveData<List<Place>>
 
 }

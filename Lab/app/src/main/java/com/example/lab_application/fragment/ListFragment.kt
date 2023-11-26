@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -99,6 +98,10 @@ class ListFragment : Fragment(){
             } else {
                 Toast.makeText(requireContext(), "Location permission rejected", Toast.LENGTH_LONG).show()
             }
+        }
+        binding.recyclerView.setOnTouchListener { v, event ->
+            binding.recyclerView.findViewById<MaterialTextView>(R.id.item_about).getParent().requestDisallowInterceptTouchEvent(false)
+            false
         }
         return view
     }

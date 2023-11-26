@@ -84,18 +84,18 @@ class ItemAdapter(
             }
             holder.rating.text = "Rating: ${rating}"
             holder.itemView.findViewById<MaterialTextView>(R.id.item_about).movementMethod = ScrollingMovementMethod()
-//            holder.itemView.findViewById<MaterialTextView>(R.id.item_about).setOnTouchListener(holder.itemView.findViewById<RecyclerView>(R.id.recycler_view).OnTouchListener { v, event ->
-//                if (holder.itemView.findViewById<MaterialTextView>(R.id.item_about).hasFocus()) {
-//                    v.parent.requestDisallowInterceptTouchEvent(true)
-//                    when (event.action and MotionEvent.ACTION_MASK) {
-//                        MotionEvent.ACTION_SCROLL -> {
-//                            v.parent.requestDisallowInterceptTouchEvent(false)
-//                            return@OnTouchListener false
-//                        }
-//                    }
-//                }
-//                false
-//            })
+            holder.itemView.findViewById<MaterialTextView>(R.id.item_about).setOnTouchListener(View.OnTouchListener { v, event ->
+                if (holder.itemView.findViewById<MaterialTextView>(R.id.item_about).hasFocus()) {
+                    v.parent.requestDisallowInterceptTouchEvent(true)
+                    when (event.action and MotionEvent.ACTION_MASK) {
+                        MotionEvent.ACTION_SCROLL -> {
+                            v.parent.requestDisallowInterceptTouchEvent(false)
+                            return@OnTouchListener false
+                        }
+                    }
+                }
+                false
+            })
             holder.itemView.findViewById<CardView>(R.id.card_layout).setOnClickListener {
                 val action = ListFragmentDirections.actionListFragmentToUpdateFragment(item)
                 holder.itemView.findNavController().navigate(action)

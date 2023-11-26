@@ -10,6 +10,7 @@ import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
@@ -127,7 +128,18 @@ class UpdateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         binding.loadImgButtonUpdate.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
-
+        binding.aboutupdate.setOnTouchListener(View.OnTouchListener { v, event ->
+            if (binding.aboutupdate.hasFocus()) {
+                v.parent.requestDisallowInterceptTouchEvent(true)
+                when (event.action and MotionEvent.ACTION_MASK) {
+                    MotionEvent.ACTION_SCROLL -> {
+                        v.parent.requestDisallowInterceptTouchEvent(false)
+                        return@OnTouchListener false
+                    }
+                }
+            }
+            false
+        })
 
         return view
     }

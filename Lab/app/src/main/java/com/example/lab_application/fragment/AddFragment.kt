@@ -4,12 +4,12 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.TextUtils
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
@@ -18,17 +18,15 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.graphics.toColor
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.lab_application.R
-import com.example.lab_application.view_model.PlaceViewModel
 import com.example.lab_application.databinding.FragmentAddBinding
 import com.example.lab_application.model.Place
+import com.example.lab_application.view_model.PlaceViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
-import java.util.Locale
 
 
 class AddFragment : Fragment(), DatePickerDialog.OnDateSetListener {
@@ -99,6 +97,18 @@ class AddFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
 
         }
+        binding.about.setOnTouchListener(OnTouchListener { v, event ->
+            if (binding.about.hasFocus()) {
+                v.parent.requestDisallowInterceptTouchEvent(true)
+                when (event.action and MotionEvent.ACTION_MASK) {
+                    MotionEvent.ACTION_SCROLL -> {
+                        v.parent.requestDisallowInterceptTouchEvent(false)
+                        return@OnTouchListener false
+                    }
+                }
+            }
+            false
+        })
         return view
     }
 

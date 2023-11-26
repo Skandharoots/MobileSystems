@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -93,7 +94,18 @@ class UpdateMarkerFragment : Fragment() {
             findNavController().navigate(R.id.action_updateMarkerFragment_to_mapFragment)
             Toast.makeText(requireContext(), "Cancelled marker update", Toast.LENGTH_LONG).show()
         }
-
+        binding.aboutupdate.setOnTouchListener(View.OnTouchListener { v, event ->
+            if (binding.aboutupdate.hasFocus()) {
+                v.parent.requestDisallowInterceptTouchEvent(true)
+                when (event.action and MotionEvent.ACTION_MASK) {
+                    MotionEvent.ACTION_SCROLL -> {
+                        v.parent.requestDisallowInterceptTouchEvent(false)
+                        return@OnTouchListener false
+                    }
+                }
+            }
+            false
+        })
         return view
     }
 

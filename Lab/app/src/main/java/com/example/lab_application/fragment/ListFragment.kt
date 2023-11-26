@@ -204,7 +204,7 @@ class ListFragment : Fragment(){
 
     private fun searchEventsBetween(start: Long, end: Long) {
         val start = myDialog?.findViewById<EditText>(R.id.datestart)?.text.toString()
-        val end = myDialog?.findViewById<EditText>(R.id.datestart)?.text.toString()
+        val end = myDialog?.findViewById<EditText>(R.id.dateend)?.text.toString()
         if (inputCheck(start, end)) {
             Log.e("C1: ", "${calendar1.timeInMillis}")
             Log.e("C2: ", "${calendar2.timeInMillis}")

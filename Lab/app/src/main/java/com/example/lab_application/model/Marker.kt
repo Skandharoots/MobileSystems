@@ -12,7 +12,7 @@ data class Marker(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val title: String,
-    val date: Date,
+    val date: Long,
     val about: String,
     val lat: Double,
     val lng: Double

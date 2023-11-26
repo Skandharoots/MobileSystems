@@ -70,7 +70,6 @@ class AddFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     ): View? {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         val view = binding.root
-
         placeViewModel = ViewModelProvider(this).get(PlaceViewModel::class.java)
 
         val addBttn = view.findViewById<Button>(R.id.add_place)

@@ -92,6 +92,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     private lateinit var markerAdapter: MarkerAdapter
 
+    private val calendar = Calendar.getInstance()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -273,6 +275,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                     val dat = (dayy.toString() + "/" + (monthh + 1) + "/" + yearr)
                     Log.d(TAG, "Date: " + dat)
                     myDialog?.findViewById<EditText>(R.id.date)?.setText(dat)
+                    calendar.set(yearr, monthh, dayy)
                 },
                 // on below line we are passing year, month
                 // and day for the selected date in our date picker.
@@ -315,7 +318,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         val sdf = SimpleDateFormat("dd/mm/yyyy", Locale.UK)
         val date = sdf.parse(dateEditable)
         if (inputCheck(title, dateEditable)) {
-            val marker = com.example.lab_application.model.Marker(0, title, date, about, lat, lng)
+            val marker = com.example.lab_application.model.Marker(0, title, calendar.timeInMillis, about, lat, lng)
             markerViewModel.addMarker(marker)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
             myDialog?.dismiss()

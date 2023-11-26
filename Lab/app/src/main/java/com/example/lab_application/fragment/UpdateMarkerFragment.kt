@@ -31,6 +31,8 @@ class UpdateMarkerFragment : Fragment() {
     private var _binding: FragmentUpdateMarkerBinding? = null
     private val binding get() = _binding!!
 
+    private val calendar = Calendar.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -58,10 +60,11 @@ class UpdateMarkerFragment : Fragment() {
             val day = c.get(Calendar.DAY_OF_MONTH)
 
             val datePickerDialog = DatePickerDialog(requireContext(),
-                { view, year, monthOfYear, dayOfMonth ->
+                { view, yearr, monthOfYear, dayOfMonth ->
                     // on below line we are setting
                     // date to our edit text.
-                    val datesel = (dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year)
+                    val datesel = (dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + yearr)
+                    calendar.set(yearr, monthOfYear, dayOfMonth)
                     binding.dateupdate.setText(datesel)
                 },
                 // on below line we are passing year, month
@@ -113,7 +116,7 @@ class UpdateMarkerFragment : Fragment() {
         if (inputCheck(city, dateEditable)) {
             val sdf = SimpleDateFormat("dd/mm/yyyy")
             val date = sdf.parse(dateEditable)
-            val marker = Marker(args.currentMarker.id, city, date, about, args.currentMarker.lat, args.currentMarker.lng)
+            val marker = Marker(args.currentMarker.id, city, calendar.timeInMillis, about, args.currentMarker.lat, args.currentMarker.lng)
             markerViewModel.updateMarker(marker)
             Toast.makeText(requireContext(), "Successfully updated!", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_updateMarkerFragment_to_mapFragment)

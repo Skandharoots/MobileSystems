@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:elevation="20dp"
         android:layout_marginTop="16dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@drawable/search_view_background">
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="30dp"

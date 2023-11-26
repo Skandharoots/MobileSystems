@@ -1,9 +1,7 @@
 package com.example.lab_application.data
 
 import androidx.lifecycle.LiveData
-import com.example.lab_application.model.Marker
 import com.example.lab_application.model.Place
-import java.util.Date
 
 class PlaceRepository(private val placeDao: PlaceDao) {
 

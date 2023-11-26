@@ -8,8 +8,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.lab_application.model.Marker
-import com.example.lab_application.model.Place
-import java.util.Date
 
 @Dao
 interface MarkerDao {

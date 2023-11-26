@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.TextUtils
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -27,8 +26,6 @@ import com.example.lab_application.databinding.FragmentUpdateBinding
 import com.example.lab_application.model.Place
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
-import java.util.Locale
 
 
 class UpdateFragment : Fragment(), DatePickerDialog.OnDateSetListener {

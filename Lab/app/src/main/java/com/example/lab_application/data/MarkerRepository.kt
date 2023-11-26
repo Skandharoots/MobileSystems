@@ -2,7 +2,6 @@ package com.example.lab_application.data
 
 import androidx.lifecycle.LiveData
 import com.example.lab_application.model.Marker
-import java.util.Date
 
 class MarkerRepository(private val markerDao: MarkerDao) {
 

@@ -9,7 +9,6 @@ import com.example.lab_application.data.PlaceDatabase
 import com.example.lab_application.model.Marker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.Date
 
 class MarkerViewModel(application: Application) : AndroidViewModel(application) {
 

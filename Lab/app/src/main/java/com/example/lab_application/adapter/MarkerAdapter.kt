@@ -12,8 +12,6 @@ import com.example.lab_application.model.Marker
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.material.card.MaterialCardView
-import java.text.SimpleDateFormat
 
 class MarkerAdapter(
     private val context: Context,

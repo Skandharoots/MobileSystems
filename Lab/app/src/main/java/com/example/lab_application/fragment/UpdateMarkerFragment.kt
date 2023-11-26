@@ -14,12 +14,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.lab_application.R
-import com.example.lab_application.databinding.FragmentUpdateBinding
 import com.example.lab_application.databinding.FragmentUpdateMarkerBinding
 import com.example.lab_application.model.Marker
-import com.example.lab_application.model.Place
 import com.example.lab_application.view_model.MarkerViewModel
-import com.example.lab_application.view_model.PlaceViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 

@@ -8,8 +8,8 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
@@ -121,23 +121,24 @@ class ListFragment : Fragment(){
                         true
                     }
                 }
-                    R.id.between -> {
-                        if (!betweenEvents) {
-                            showPopup(requireView())
-                            betweenEvents = true
-                            true
-                        } else {
-                            getDefaultDatabase()
-                            betweenEvents = false
-                            true
-                        }
+                R.id.between -> {
+                    if (!betweenEvents) {
+                        showPopup(requireView())
+                        betweenEvents = true
+                        true
+                    } else {
+                        getDefaultDatabase()
+                        betweenEvents = false
+                        true
                     }
-                    else -> {
-                        false
-                    }
+                }
+                else -> {
+                    false
                 }
             }
         }
+
+    }
 
     private fun showPopup(v: View) {
         myDialog?.setContentView(R.layout.event_between_popup)

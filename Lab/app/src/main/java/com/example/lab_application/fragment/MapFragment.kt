@@ -140,6 +140,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 }
             }
         }
+        binding.exitrecyclerbutton.setOnClickListener {
+            changeVisibilityToGone()
+        }
         val menuSearchItem = binding.myToolbar.menu.findItem(R.id.search)
         val searchView = menuSearchItem.actionView as SearchView
         searchView.queryHint = "Type here to search..."
@@ -331,8 +334,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     private fun changeVisibilityToVisible() : Boolean {
-        return if (binding.recyclerViewMarker.visibility == View.GONE) {
-            binding.recyclerViewMarker.visibility = View.VISIBLE
+        return if (binding.recyclerViewLayout.visibility == View.GONE) {
+            binding.recyclerViewLayout.visibility = View.VISIBLE
             true
         } else {
             false
@@ -340,8 +343,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     private fun changeVisibilityToGone() : Boolean {
-        return if (binding.recyclerViewMarker.visibility == View.VISIBLE) {
-            binding.recyclerViewMarker.visibility = View.GONE
+        return if (binding.recyclerViewLayout.visibility == View.VISIBLE) {
+            binding.recyclerViewLayout.visibility = View.GONE
             true
         } else {
             false

@@ -58,8 +58,14 @@ class ListFragment : Fragment(){
     private var myDialog : Dialog? = null
 
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED) {
+            getLocationPermissions()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -86,12 +92,13 @@ class ListFragment : Fragment(){
         }
         val btn2 = view.findViewById<FloatingActionButton>(R.id.map_button)
         btn2.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_mapFragment)
-        }
-        if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) !=
-            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) !=
-            PackageManager.PERMISSION_GRANTED) {
-            getLocationPermissions()
+            if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED) {
+                findNavController().navigate(R.id.action_listFragment_to_mapFragment)
+            } else {
+                Toast.makeText(requireContext(), "Location permission rejected", Toast.LENGTH_LONG).show()
+            }
         }
         return view
     }

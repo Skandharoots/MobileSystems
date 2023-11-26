@@ -115,6 +115,11 @@ class UpdateMarkerFragment : Fragment() {
         binding.myToolbar.setTitle("Update Marker")
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun updateMarker() {
         val city = binding.titleupdate.text.toString()
         val dateEditable = binding.dateupdate.text.toString()

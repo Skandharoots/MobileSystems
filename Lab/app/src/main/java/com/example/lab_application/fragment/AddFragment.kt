@@ -121,6 +121,11 @@ class AddFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         binding.myToolbar.setTitle("Add Place")
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
     private fun insertDataToDatabase() {
         if (requireView().findViewById<RadioButton>(R.id.b1).isChecked) {

@@ -151,6 +151,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun searchByTitle(searchQuery: String) {
         val search = "%$searchQuery%"
         markerViewModel.searchDatabaseByTitle(search).observe(viewLifecycleOwner) { markers ->

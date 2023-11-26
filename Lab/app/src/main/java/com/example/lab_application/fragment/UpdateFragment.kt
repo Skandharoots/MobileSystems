@@ -150,6 +150,11 @@ class UpdateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         binding.myToolbar.setTitle("Update Place")
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun updateItem() {
         if (binding.b1u.isChecked) {
             rating = 1

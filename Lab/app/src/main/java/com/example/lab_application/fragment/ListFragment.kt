@@ -117,21 +117,23 @@ class ListFragment : Fragment(){
                         val currentDate = Calendar.getInstance()
                         filterByEvent(currentDate.timeInMillis)
                         upcomingEvents = true
+                        it.title = "Default"
                         true
                     } else {
                         getDefaultDatabase()
                         upcomingEvents = false
+                        it.title = "Upcoming"
                         true
                     }
                 }
                 R.id.between -> {
                     if (!betweenEvents) {
                         showPopup(requireView())
-                        betweenEvents = true
                         true
                     } else {
                         getDefaultDatabase()
                         betweenEvents = false
+                        it.title = "Between"
                         true
                     }
                 }
@@ -217,9 +219,11 @@ class ListFragment : Fragment(){
                     itemAdapter.setData(places)
                 }
             myDialog?.dismiss()
+            betweenEvents = true
+            binding.myToolbar.menu.findItem(R.id.between).title = "Default"
         } else {
             Toast.makeText(requireContext(), "Please fill out date fields", Toast.LENGTH_LONG).show()
-
+            betweenEvents = false
         }
     }
 

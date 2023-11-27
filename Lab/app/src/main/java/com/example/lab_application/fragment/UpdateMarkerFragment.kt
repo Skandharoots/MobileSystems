@@ -44,7 +44,7 @@ class UpdateMarkerFragment : Fragment() {
 
         markerViewModel = ViewModelProvider(this).get(MarkerViewModel::class.java)
         binding.titleupdate.setText(args.currentMarker.title)
-        val spf = SimpleDateFormat("dd/mm/yyyy")
+        val spf = SimpleDateFormat("dd/MM/yyyy")
         val date = spf.format(args.currentMarker.date)
         binding.dateupdate.setText(date)
         binding.aboutupdate.setText(args.currentMarker.about)

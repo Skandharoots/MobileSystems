@@ -3,8 +3,8 @@ package com.example.lab_application.adapter
 import android.content.Context
 import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,8 +14,8 @@ import androidx.cardview.widget.CardView
 import androidx.documentfile.provider.DocumentFile
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lab_application.fragment.ListFragmentDirections
 import com.example.lab_application.R
+import com.example.lab_application.fragment.ListFragmentDirections
 import com.example.lab_application.model.Place
 import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
@@ -78,16 +78,8 @@ class ItemAdapter(
             }
             holder.rating.text = "Rating: ${rating}"
             holder.itemView.findViewById<MaterialTextView>(R.id.item_about).movementMethod = ScrollingMovementMethod()
-            holder.itemView.findViewById<MaterialTextView>(R.id.item_about).setOnTouchListener(View.OnTouchListener { v, event ->
-                if (holder.itemView.findViewById<MaterialTextView>(R.id.item_about).hasFocus()) {
-                    v.parent.requestDisallowInterceptTouchEvent(true)
-                    when (event.action and MotionEvent.ACTION_MASK) {
-                        MotionEvent.ACTION_SCROLL -> {
-                            v.parent.requestDisallowInterceptTouchEvent(false)
-                            return@OnTouchListener false
-                        }
-                    }
-                }
+            holder.itemView.findViewById<MaterialTextView>(R.id.item_about).setOnTouchListener(OnTouchListener { v, event -> // Disallow the touch request for parent scroll on touch of child view
+                v.parent.requestDisallowInterceptTouchEvent(true)
                 false
             })
             holder.itemView.findViewById<CardView>(R.id.card_layout).setOnClickListener {
